@@ -11,9 +11,7 @@ interface USer extends Document {
 }
 
 const userSchema = new Schema<USer>({
-    _id: {
-        type: ObjectId,
-    },
+    _id: String,
     username: {
         type: String,
     },
