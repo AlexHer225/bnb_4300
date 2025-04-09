@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import ObjectId from "mongodb";
 
 interface USer extends Document {
     username: string;
@@ -11,12 +10,18 @@ interface USer extends Document {
 }
 
 const userSchema = new Schema<USer>({
-    _id: String,
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(),
+        required: true,
+    },
     username: {
         type: String,
+        required: true,
     },
     passwordHashed: {
         type: String,
+        required: true,
     },
     excludeCuisine: {
         type: String,
