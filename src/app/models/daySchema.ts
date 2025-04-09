@@ -1,22 +1,27 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import ObjectId from "mongodb";
-
+import Meal from "./mealSchema";
 
 interface DAy extends Document {
-    dayOfWeek: string;
-    date: string;
-    meal: Object;
+    dayOfWeek?: string;
+    date?: Date;
+    meals?: [{type: mongoose.Schema.Types.ObjectId, ref: 'Meal'}];
 }
 
 const daySchema = new Schema<DAy>({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(),
+        required: true,
+    },    
     dayOfWeek: {
         type: String,
     },
     date: {
-        type: String,
+        type: Date,
     },
-    meal: {
-        type: Object,
+    meals: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Meal',
     },
 });
 

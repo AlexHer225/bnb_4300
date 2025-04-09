@@ -1,4 +1,5 @@
 import connectMongoDB from "../../../../config/mongodb";
+import mongoose from "mongoose";
 import Meal from "../../models/mealSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
@@ -10,8 +11,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const { title, image, readyInMinutes, sourceUrl, cheap, instructions, extendedIngredients, summary } = await request.json();
+    const { title, image, readyInMinutes, sourceUrl, cheap, diets, summary } = await request.json();
+    const id = new mongoose.Types.ObjectId();    
     await connectMongoDB();
-    await Meal.create({ title, image, readyInMinutes, sourceUrl, cheap, instructions, extendedIngredients, summary });
+    await Meal.create({ id, title, image, readyInMinutes, sourceUrl, cheap, diets, summary });
     return NextResponse.json({message: "Meal added successfully"}, {status: 201});
 }

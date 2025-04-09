@@ -1,6 +1,4 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import ObjectId from "mongodb";
-
 
 interface MEal extends Document {
     title: string;
@@ -8,35 +6,37 @@ interface MEal extends Document {
     readyInMinutes: number;
     sourceUrl: string;
     cheap: boolean;
-    instructions: string;
-    extendedIngredients: Array<string>;
-    summary: string;
-
+    diets?: [string];
+    summary?: string;
 }
 
 const mealSchema = new Schema<MEal>({
     _id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(),
+        required: true,
     },
     title: {
         type: String,
+        required: true,
     },
     image: {
         type: String,
+        required: true
     },
     readyInMinutes: {
         type: Number,
+        required: true,
     },
     sourceUrl: {
         type: String,
+        required: true,
     },
     cheap: {
         type: Boolean,
+        required: true,
     },
-    instructions: {
-        type: String,
-    },
-    extendedIngredients: {
+    diets: {
         type: [String],
     },
     summary: {
