@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import connectMongoDB from "../../config/mongodb";
 import "../css/splash.css";
@@ -18,13 +19,22 @@ export default function Home() {
       </>
       <div className="splash-buttons-flex"> 
         <button className="splash-button-signup">SIGN UP</button>
-        <button className="splash-button-login">LOGIN</button>
+        <button 
+          className="splash-button-login"
+          onClick={() => {
+            window.location.href = "/login";
+          }}
+        >LOGIN</button>
 
       </div>
      </div>
       <div className="middle-div-splash">
         <h1>Use Hangry Yourself</h1>
-        <button>Try It Now</button>
+        <button
+          onClick={() => {
+            window.location.href = "/dashboard";
+          }}
+        >Try It Now</button>
       </div>
 
       <div className="bottom-div-splash">
