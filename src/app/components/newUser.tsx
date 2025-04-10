@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import connectMongoDB from "../../../config/mongodb";
 import { useRouter } from 'next/navigation';
+import './formstyles.css'
 
 interface input {
     id: number;
@@ -22,7 +23,7 @@ export default function newUser({ onAddForm }:newDetailProps){
     const[formArgs, setFormArgs ] = useState({
         userName: '',
         password: '',
-        excludeCusuine:'',
+        excludeCuisine:'',
         diet: '',
         intolerances:'',
         excludeIngredients:'',
@@ -32,7 +33,7 @@ export default function newUser({ onAddForm }:newDetailProps){
     const handleSubmit = async (e: React.FormEvent)=>{
         e.preventDefault();
         try{
-        const response = await fetch('/api/items', {
+        const response = await fetch('/api/user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export default function newUser({ onAddForm }:newDetailProps){
         setFormArgs({
         userName: '',
         password: '',
-        excludeCusuine:'',
+        excludeCuisine:'',
         diet: '',
         intolerances:'',
         excludeIngredients:'',});
@@ -70,8 +71,15 @@ export default function newUser({ onAddForm }:newDetailProps){
          }));
       };
     return(
-        <div>
-        <form onSubmit = {handleSubmit} className="space-y-4  p-4 rounded">
+        <div className = "form-border">
+            <div className = "form-block">
+        <form onSubmit = {handleSubmit} className="form-style">
+        <img 
+        src="/../images/Hangry-Bear-Transparent.png"
+        alt="Hangry Logo"
+        width={400}
+        height={400}
+        />
             <input
                 name = "userName"
                 type="string"
@@ -79,26 +87,26 @@ export default function newUser({ onAddForm }:newDetailProps){
                 onChange={handleChange}
                 placeholder="Enter Username"
                 required
-                className="w-full p-2 border rounded"
+                className="user"
             />
             <input
                 name = "Exclude Ingredients"
                 type="string"
                 value={formArgs.excludeIngredients}
                 onChange={handleChange}
-                placeholder="Enter Email"
+                placeholder="Exclude Ingredients"
                 required
-                className="w-full p-2 border rounded"
+                className="user"
             />
 
         <input
-                name = "Exclude Cusuine"
+                name = "Exclude Cuisine"
                 type="string"
-                value={formArgs.excludeCusuine}
+                value={formArgs.excludeCuisine}
                 onChange={handleChange}
-                placeholder="Enter Email"
+                placeholder="Exclude Cuisine"
                 required
-                className="w-full p-2 border rounded"
+                className="user"
             />
             <input
                 name = "password"
@@ -107,29 +115,29 @@ export default function newUser({ onAddForm }:newDetailProps){
                 onChange={handleChange}
                 placeholder="Enter Password"
                 required
-                className="w-full p-2 border rounded"
+                className="user"
             />
             <input
                 name = "diet"
                 type="string"
                 value={formArgs.diet}
                 onChange={handleChange}
-                placeholder="Generate a Schedule"
+                placeholder="Enter Dietary Specifics"
                 required
-                className="w-full p-2 border rounded"
+                className="user"
             />
             <input
                 name = "Intolerances"
                 type="string"
                 value={formArgs.intolerances}
                 onChange={handleChange}
-                placeholder="Enter Email"
-                required
-                className="w-full p-2 border rounded"
+                placeholder="Enter Food Intolerances"
+                className="user"
             />
 
             
         </form>
+        </div>
         </div>
     );
 }
