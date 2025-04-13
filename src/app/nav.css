@@ -1,0 +1,53 @@
+.topbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #3b3b3b; 
+  padding: 0.7rem 2rem;
+  position: fixed;
+  font-family: Arial, sans-serif;
+  top:0;
+  
+  
+  z-index: 1000;
+}
+.text{
+    position: absolute;
+    left: 46%;
+    font-size: 25px;
+    font-weight: bold;
+    
+}
+
+.content{
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-left: auto;
+}
+.logbutton{
+    display: flex;
+    margin-left: auto;
+    padding: 0.3rem 0.9rem;
+    background-color: #94A864;
+    border-radius: 9px;
+}
+.signbutton{
+    display: flex;
+    padding: 0.3rem 0.9rem;
+    background-color: #94A864;
+    border-radius: 9px;
+    align-items: center;
+    margin-left: 0;
+}
+
+.logbutton:hover{
+    background-color: #324732;
+    transform: translateY(-2px)
+}
+
+.signbutton:hover{
+    background-color: #324732;
+    transform: translateY(-2px)
+}
