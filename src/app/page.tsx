@@ -2,11 +2,13 @@
 import Image from "next/image";
 import connectMongoDB from "../../config/mongodb";
 import "../css/splash.css";
+import Navbar from './Navbar';    
 
 export default function Home() {
   connectMongoDB();
   return (
     <div className="splash-container">
+      <Navbar/>
      <div className="top-div-splash">
       <h1>ARE YOU</h1>
       <>
