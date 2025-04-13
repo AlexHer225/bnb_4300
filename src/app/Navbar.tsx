@@ -22,12 +22,20 @@ const Navbar = () =>{
     userAuth();
     window.location.href = "/login";
   }
+
+  const handleDashboard = () => {
+    window.location.href = "/dashboard";
+  }
     
     
     return(
         <nav className = "topbar">
             <div className='text'>
-            <h1>Hangry</h1>
+            <h1
+                onClick={handleDashboard}
+                >Hangry
+            </h1>
+            
             </div>
             {
                 !isLoggedIn &&(
