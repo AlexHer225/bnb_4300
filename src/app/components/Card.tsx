@@ -23,10 +23,6 @@ const styles = {
         maxWidth: '300px',
         margin: '16px',
     },
-    image: {
-        width: '100%',
-        height: 'auto',
-    },
     content: {
         padding: '16px',
     },
