@@ -1,12 +1,14 @@
 import Card from "./Card"
+import Meal from "../models/mealSchema";
+import Day from "../models/daySchema";
 
-function DayComponent({ day }: { day: Day }) {
+function DayComponent({ day }: { day: typeof Day["prototype"] }) {
     return (
         <Card
-            key={day._id}
+            key={day.dayOfWeek}
             // title should be editable by user, but can figure this out later
             title={day.date.toString()}
-            description={day.meals.map((meal: Meal) => meal.name).join(", ")}
+            description={day.meal.map((meal: typeof Meal) => meal.name).join(", ")}
         />
     );
 }

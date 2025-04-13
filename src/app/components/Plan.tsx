@@ -1,24 +1,11 @@
 import {useState} from "react";
 import DayComponent from "./DayComponent";
+import { randomUUID } from "crypto";
 
 interface planProps {
     title: string;
 
-    days: {
-        _id: string;
-        date: Date;
-        meals: {
-            _id: string;
-            title: string;
-            image: string;
-            readyInMinutes: number;
-            sourceUrl: string;
-            cheap: boolean;
-            instructions: string;
-            extendedIngredients: Array<string>;
-            summary: string;
-        }[];
-    }[];
+    days: typeof DayComponent["prototype"][];
 }
 
 function Plan(props: planProps) {
@@ -28,7 +15,7 @@ function Plan(props: planProps) {
         <div>
             <h1>{props.title}</h1>
             {days.map((day) => (
-                <DayComponent key={day._id} day={day} />
+                <DayComponent key={Number(randomUUID)} day={day} />
             ))}
         </div>
     );
