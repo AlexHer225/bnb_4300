@@ -3,20 +3,21 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: #3b3b3b; 
+  background-color: #5D5D5D; 
   padding: 0.7rem 2rem;
   position: fixed;
   font-family: Arial, sans-serif;
   top:0;
-  
-  
   z-index: 1000;
 }
+
 .text{
     position: absolute;
-    left: 46%;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 25px;
     font-weight: bold;
+    color: #F5F1E3;
     
 }
 
@@ -32,6 +33,7 @@
     padding: 0.3rem 0.9rem;
     background-color: #94A864;
     border-radius: 9px;
+    cursor: pointer;
 }
 .signbutton{
     display: flex;
@@ -40,6 +42,7 @@
     border-radius: 9px;
     align-items: center;
     margin-left: 0;
+    cursor: pointer;
 }
 
 .logbutton:hover{
