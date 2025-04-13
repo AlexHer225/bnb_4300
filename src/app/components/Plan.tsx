@@ -1,19 +1,37 @@
-import Card from '.Card';
+import {useState} from "react";
+import DayComponent from "./DayComponent";
 
-interface PlanProps {
-    plan: {
-        id: number;
-        name: string;
-        // plan has MealPlan ?
-    };
-};
+interface planProps {
+    title: string;
 
-export default function Plan({ plan } : PlanProps) {
+    days: {
+        _id: string;
+        date: Date;
+        meals: {
+            _id: string;
+            title: string;
+            image: string;
+            readyInMinutes: number;
+            sourceUrl: string;
+            cheap: boolean;
+            instructions: string;
+            extendedIngredients: Array<string>;
+            summary: string;
+        }[];
+    }[];
+}
+
+function Plan(props: planProps) {
+    const [days, setDays] = useState(props.days);
+
     return (
-        <Card className = {}>
-            <div className = {}>
-                <h2> {plan.name} </h2>
-            </div>
-        </Card>
+        <div>
+            <h1>{props.title}</h1>
+            {days.map((day) => (
+                <DayComponent key={day._id} day={day} />
+            ))}
+        </div>
     );
 }
+// Plan component that takes in a title and an array of days
+export default Plan;
