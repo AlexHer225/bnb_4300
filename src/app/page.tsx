@@ -20,7 +20,12 @@ export default function Home() {
         />
       </>
       <div className="splash-buttons-flex"> 
-        <button className="splash-button-signup">SIGN UP</button>
+        <button
+         className="splash-button-signup"
+         onClick={() => {
+          window.location.href = "/signup"
+         }}
+         >SIGN UP</button>
         <button 
           className="splash-button-login"
           onClick={() => {
