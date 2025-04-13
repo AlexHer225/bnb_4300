@@ -24,6 +24,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
     const[formArgs, setFormArgs ] = useState({
         userName: '',
         password: '',
+        confirmPassword: '',
         excludeCuisine:'',
         diet: '',
         intolerances:'',
@@ -48,6 +49,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
         setFormArgs({
         userName: '',
         password: '',
+        confirmPassword: '',
         excludeCuisine:'',
         diet: '',
         intolerances:'',
@@ -68,7 +70,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
   
           ...prev,
   
-          [name]: name=== 'owner' ? Number(value) : value,
+          [name]: value,
          }));
       };
     return(
@@ -101,16 +103,16 @@ export default function NewUser({ onAddForm }:newDetailProps){
                 className="user"
             />
             <input
-                name = "confirm-password"
+                name = "confirmPassword"
                 type="string"
-                value={formArgs.password}
+                value={formArgs.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 required
                 className="user"
             />
             <input
-                name = "Exclude Ingredients"
+                name = "excludeIngredients"
                 type="string"
                 value={formArgs.excludeIngredients}
                 onChange={handleChange}
@@ -120,7 +122,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
             />
 
         <input
-                name = "Exclude Cuisine"
+                name = "excludeCuisine"
                 type="string"
                 value={formArgs.excludeCuisine}
                 onChange={handleChange}
@@ -138,7 +140,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
                 className="user"
             />
             <input
-                name = "Intolerances"
+                name = "intolerances"
                 type="string"
                 value={formArgs.intolerances}
                 onChange={handleChange}
