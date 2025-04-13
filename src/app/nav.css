@@ -21,6 +21,11 @@
     
 }
 
+.text:hover{
+    color: #94A864;
+    cursor: pointer;
+}
+
 .content{
     display: flex;
     justify-content: flex-start;
