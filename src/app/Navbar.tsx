@@ -35,7 +35,7 @@ const Navbar = () =>{
                 
                 <button onClick ={handleSignup}className ="signbutton">Sign Up</button>
                 <button onClick = {handleLogin} className ="logbutton">
-                    {isLoggedIn ? 'Logout' : 'Login'}
+                    Login
                 </button>
             </div>
                 )
@@ -47,7 +47,7 @@ const Navbar = () =>{
                 
                 
                 <button onClick = {userAuth} className ="logbutton">
-                    {isLoggedIn ? 'Logout' : 'Login'}
+                    Logout
                 </button>
             </div>
                 )
