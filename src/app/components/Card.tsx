@@ -1,15 +1,24 @@
+import Button from "./Button";
+import Meal from "../models/mealSchema";
+
+
 interface CardProps {
     title: string;
-    description: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description }) => {
+const Card: React.FC<CardProps> = ({ title }) => {
+    // handler -> on click, creates meal. on clicking a meal, user can change / edit it
+    function handleClick() {
+
+    }
+
+    // Card -> represents a "day" of meal plans
     return (
         <div className="card" style={styles.card}>
-            <div style={styles.content}>
-                <h2 style={styles.title}>{title}</h2>
-                <p style={styles.description}>{description}</p>
-            </div>
+            <h1>{title}</h1>
+            <Button onClick={handleClick} />
+            <Button onClick={handleClick} />
+            <Button onClick={handleClick} />
         </div>
     );
 };
