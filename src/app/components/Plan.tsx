@@ -1,24 +1,18 @@
-import {useState} from "react";
 import DayComponent from "./DayComponent";
-import { randomUUID } from "crypto";
 
-interface planProps {
-    title: string;
-
-    days: typeof DayComponent["prototype"][];
-}
-
-function Plan(props: planProps) {
-    const [days, setDays] = useState(props.days);
-
+function Plan() {
     return (
-        <div>
-            <h1>{props.title}</h1>
-            {days.map((day) => (
-                <DayComponent key={Number(randomUUID)} day={day} />
-            ))}
+        <div className="plan">
+            <h1>Plan</h1>
+            <DayComponent day={{dayOfWeek: "Monday"}}/>
+            <DayComponent day={{dayOfWeek: "Tuesday"}}/>
+            <DayComponent day={{dayOfWeek: "Wednesday"}}/>
+            <DayComponent day={{dayOfWeek: "Thursday"}}/>
+            <DayComponent day={{dayOfWeek: "Friday"}}/>
+            <DayComponent day={{dayOfWeek: "Saturday"}}/>
+            <DayComponent day={{dayOfWeek: "Sunday"}}/>
         </div>
     );
 }
-// Plan component that takes in a title and an array of days
+
 export default Plan;
