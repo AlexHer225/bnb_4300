@@ -1,9 +1,20 @@
 import DayComponent from "./DayComponent";
+import "../../css/dashboard.css";
 
-function Plan() {
+type Day = {
+    dayOfWeek: string;
+    date?: Date;
+    meals?: {name: string}[]; 
+}
+
+type PlanProps = {
+    title: string;
+    days: Day[];
+}
+
+function Plan({ title, days }: PlanProps) {
     return (
-        <div className="plan">
-            <h1>Plan</h1>
+        <div className="plan-container">
             <DayComponent day={{dayOfWeek: "Monday"}}/>
             <DayComponent day={{dayOfWeek: "Tuesday"}}/>
             <DayComponent day={{dayOfWeek: "Wednesday"}}/>

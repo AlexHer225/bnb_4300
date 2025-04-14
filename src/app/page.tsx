@@ -8,7 +8,6 @@ export default function Home() {
   connectMongoDB();
   return (
     <div className="splash-container">
-      <Navbar/>
      <div className="top-div-splash">
       <h1>ARE YOU</h1>
       <>

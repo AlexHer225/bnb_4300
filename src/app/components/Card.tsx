@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Meal from "../models/mealSchema";
+import "../../css/dashboard.css";
 
 
 interface CardProps {
@@ -14,11 +15,13 @@ const Card: React.FC<CardProps> = ({ title }) => {
 
     // Card -> represents a "day" of meal plans
     return (
-        <div className="card" style={styles.card}>
+        <div className="card">
             <h1>{title}</h1>
-            <Button onClick={handleClick} />
-            <Button onClick={handleClick} />
-            <Button onClick={handleClick} />
+            <div className="card-content">
+                <Button onClick={handleClick} />
+                <Button onClick={handleClick} />
+                <Button onClick={handleClick} />
+            </div>
         </div>
     );
 };
@@ -32,7 +35,13 @@ const styles = {
         overflow: 'hidden',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         maxWidth: '300px',
+        minWidth: '200px',
         margin: '16px',
+        height: '200px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     content: {
         padding: '16px',

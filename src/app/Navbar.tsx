@@ -13,13 +13,13 @@ const Navbar = () =>{
   }
 
   const handleSignup = () =>{
-    userAuth();
+    //userAuth();
     window.location.href = "/signup";
 
   }
 
   const handleLogin = () =>{
-    userAuth();
+   // userAuth();
     window.location.href = "/login";
   }
 
