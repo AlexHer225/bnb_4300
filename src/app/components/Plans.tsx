@@ -1,10 +1,13 @@
 import Plan from "./Plan";
 import Button from "./Button";
 import { useState } from "react";
+import DayComponent from "./DayComponent";
+import '../../css/dashboard.css';
 
 // Carousel of plans 
 export default function Plans({plansProps}) {
     const [plans, setPlans] = useState(plansProps);
+
 
     function handleClick () {
         const newPlan = {

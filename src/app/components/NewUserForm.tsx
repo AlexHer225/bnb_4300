@@ -30,6 +30,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
         intolerances:'',
         excludeIngredients:'',
     });
+    
 
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent)=>{

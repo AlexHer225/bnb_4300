@@ -1,0 +1,105 @@
+body{
+    background-color: #94A864;
+    margin-top: 100px;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-title {
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 60px;
+
+}
+
+.header-dashboard{
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 45px;
+}
+
+.dashboard-login-description{
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.new-plan-button{
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.new-plan-button:hover{
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+}
+
+.plans{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.plans-title{
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.plan-container{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    min-width: 200px;
+    margin: 16px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #324732;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px; 
+    color: #F5F1E3;
+}
+
+.card h1{
+    color: #F5F1E3;
+    font-size: 20px;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 50px;
+}
+
+
+
+
