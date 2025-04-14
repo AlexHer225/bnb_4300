@@ -1,6 +1,4 @@
 import Button from "./Button";
-import Meal from "../models/mealSchema";
-
 
 interface CardProps {
     title: string;
