@@ -2,7 +2,6 @@ import Button from "./Button";
 import Meal from "../models/mealSchema";
 import "../../css/dashboard.css";
 
-
 interface CardProps {
     title: string;
 }

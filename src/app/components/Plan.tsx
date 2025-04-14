@@ -1,29 +1,27 @@
 import DayComponent from "./DayComponent";
 import "../../css/dashboard.css";
 
-type Day = {
-    dayOfWeek: string;
-    date?: Date;
-    meals?: {name: string}[]; 
-}
-
-type PlanProps = {
-    title: string;
-    days: Day[];
-}
-
-function Plan({ title, days }: PlanProps) {
+interface PlanProps {
+    plan: {
+      _id: string;
+      days: {
+        _id: string;
+        dayOfWeek: string;
+        date: Date;
+        meals: any[]; 
+      }[];
+    };
+  }
+  
+  function Plan({ plan }: PlanProps) {
     return (
-        <div className="plan-container">
-            <DayComponent day={{dayOfWeek: "Monday"}}/>
-            <DayComponent day={{dayOfWeek: "Tuesday"}}/>
-            <DayComponent day={{dayOfWeek: "Wednesday"}}/>
-            <DayComponent day={{dayOfWeek: "Thursday"}}/>
-            <DayComponent day={{dayOfWeek: "Friday"}}/>
-            <DayComponent day={{dayOfWeek: "Saturday"}}/>
-            <DayComponent day={{dayOfWeek: "Sunday"}}/>
-        </div>
+      <div className="plan">
+        <h1>Plan</h1>
+        {plan.days.map((day) => (
+            <DayComponent key={day._id} day={day} />
+        ))}
+      </div>
     );
-}
-
-export default Plan;
+  }
+  
+  export default Plan;

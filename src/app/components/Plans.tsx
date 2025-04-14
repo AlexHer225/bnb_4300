@@ -5,18 +5,33 @@ import DayComponent from "./DayComponent";
 import '../../css/dashboard.css';
 
 // Carousel of plans 
-export default function Plans({title, days}: { title: string, days: typeof DayComponent['prototype'][] }) {
-    // handler -> on click, creates new plan
-    function handleClick() {
+export default function Plans({plansProps}) {
+    const [plans, setPlans] = useState(plansProps);
 
+
+    function handleClick () {
+        const newPlan = {
+            _id: `${Date.now()}`,
+            days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => ({
+                _id: `${Date.now()}-${index}`,
+                dayOfWeek: day,
+                date: new Date(),
+                meals: [],
+            }))
+        };
+        setPlans(prev => [...prev, newPlan]);
     }
-
+    
     return (
         <div className="plans">
-            <h2 className="plans-title">{title}</h2>
-            <div className="plans-days">
-                <Plan title={title} days={days} />
+            <h1>My Plans</h1>
+            <div className="plans-carousel">
+                {plans.map((plan, index) => (
+                    <Plan key={index} plan={plan} />
+                ))}
             </div>
+
+            <Button onClick={handleClick}/>
         </div>
     );
 }
