@@ -2,13 +2,15 @@ import Button from "./Button";
 
 interface CardProps {
     title: string;
+    children?: React.ReactNode;
 }
 
-function Card ({ title } : CardProps) {
+function Card ({ title, children } : CardProps) {
     return (
         <div className="card" style={styles.card}>
             <div className="card-content" style={styles.content}>
                 <h1 style={styles.title}>{title}</h1>
+                {children}
             </div>
         </div>
     );
