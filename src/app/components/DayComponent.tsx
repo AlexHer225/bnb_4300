@@ -44,14 +44,16 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
 
   return (
     <div className="dayComponent">
-      <Card title={day.dayOfWeek} />
-      <h3>Meals:</h3>
-      <ul>
-        {meals.map((meal, index) => (
-          <li key={index}>{meal.name}</li>
-        ))}
-      </ul>
-
+      <Card title={day.dayOfWeek}>
+        <h3>Meals:</h3>
+        <ul>
+            {meals.map((meal, index) => (
+                <li key={index}>{meal.name}</li>
+            ))}
+        </ul> 
+        </Card>
+      
+      
       <div className="quick-add-button">
         {showForm && (
           <div

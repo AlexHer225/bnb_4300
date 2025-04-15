@@ -8,6 +8,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 65px;
 }
 
 .dashboard-title {
@@ -67,6 +68,7 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 
 
@@ -76,7 +78,7 @@ body{
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 300px;
-    min-width: 200px;
+    min-width: 150px;
     margin: 16px;
     height: 200px;
     display: flex;
@@ -85,6 +87,7 @@ body{
     align-items: center;
     text-align: center;
     background: #324732;
+    margin: 0;
 }
 
 .card-content {
@@ -105,6 +108,11 @@ body{
 .plan-flex-container{
     display: flex;
     flex-direction: row;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 0;
 }
 
 .meal-plan-button {
@@ -175,7 +183,7 @@ body{
     border: none;
     cursor: pointer;
     margin-top: 20px;
-    margin-left: 23%;
+    margin-left: 18.5%;
     padding-top: 2px;
     max-width: 125px;
 }
@@ -199,7 +207,7 @@ body{
     cursor: pointer;
     margin-top: 10px;
     align-self: center;
-    margin-left: 23%;
+    margin-left: 18.5%;
     padding-top: 2px;
     max-width: 125px;
 }
