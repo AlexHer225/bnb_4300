@@ -22,6 +22,7 @@ interface PlansProps {
 // Carousel of plans 
 export default function Plans({plansProps}: PlansProps) {
     const [plans, setPlans] = useState(plansProps);
+    const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
     // IDs are placeholders, change when backend is implemented
     function handleClick () {
@@ -41,11 +42,11 @@ export default function Plans({plansProps}: PlansProps) {
         <div className="plans">
             <div className="plans-carousel">
                 {plans.map((plan: PlanType, index: number) => (
-                    <Plan key={index} plan={plan} />
+                    <Plan key={index} plan={plan} selectedDayId={selectedDayId} setSelectedDayId={setSelectedDayId} />
                 ))}
             </div>
             <div className="meal-plan-button">   
-                <Button onClick={handleClick}/>
+                <Button onClick={handleClick} text="Add Week"/>
             </div> 
         </div>
     );

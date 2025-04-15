@@ -22,7 +22,7 @@ const styles = {
         borderRadius: '8px',
         overflow: 'hidden',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        maxWidth: '300px',
+        maxWidth: '200px',
         margin: '16px',
     },
     content: {

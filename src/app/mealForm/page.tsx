@@ -12,7 +12,6 @@ export default function Meal(){
     }
         
     return(
-    
         <>
             <Navbar />
             <MealForm onAddForm={handleAddForm} />

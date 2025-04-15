@@ -147,6 +147,45 @@ body{
     color: black;
 }
 
+.dayComponent h3{
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.dayComponent ul{
+    text-align: center;
+    list-style: none;
+    font-size: 18px;
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.meal-add-button{
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    width: 60%;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 20%;
+    padding-top: 2px;
+    max-width: 125px;
+}
+
+.meal-add-button:hover{
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+}
+
 
 
 

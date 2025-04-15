@@ -1,103 +1,67 @@
-import Card from "./Card"
+import Card from "./Card";
 import Button from "./Button";
+import MealForm from "./MealForm";
 import { useState } from "react";
-import '../../css/dashboard.css';
+import "../../css/dashboard.css";
 
 interface DayComponentProps {
-    day: {
-        _id: string;
-        dayOfWeek: string;
-        date: Date;
-        meals: any[]; 
-      }
+  day: {
+    _id: string;
+    dayOfWeek: string;
+    date: Date;
+    meals: { name: string }[];
+  };
+  onClick: () => void;
+  selectedDay: string | null;
 }
 
-function DayComponent({ day } : DayComponentProps) {
-    const [meals, setMeals] = useState(day.meals);
+function DayComponent({ day, selectedDay }: DayComponentProps) {
+  const [meals, setMeals] = useState(day.meals);
+  const [isAddButton, setIsAddButton] = useState(true); // Converted to state
+  const [showForm, setShowForm] = useState(false); 
 
-    let isAddButton = true;
+  //Show the Meal Form
+  function handleToggleForm() {
+    setShowForm((prev) => !prev);
+  }
 
-    // Function to handle adding a meal
-    function handleAddMeal() {
-        const newMeal = {
-            _id: `${Date.now()}`,
-            name: "New Meal",
-            ingredients: [],
-            instructions: "",
-            image: "",
-            servings: 1,
-            readyInMinutes: 30,
-        };
-        setMeals((prevMeals) => [...prevMeals, newMeal]);
-        isAddButton = false;
+  function handleAddMeal(newMeal: { name: string }) {
+    setMeals((prevMeals) => [...prevMeals, newMeal]);
+    setIsAddButton(false);
+  }
+
+  function handleDeleteMeal() {
+    setMeals((prevMeals) => prevMeals.slice(0, -1));
+    setIsAddButton(true);
+  }
+
+  function chooseButtonHandler() {
+    if (isAddButton) {
+      // fallback: add a dummy meal if no form used
+      handleAddMeal({ name: "Spaghetti" });
+    } else {
+      handleDeleteMeal();
     }
+  }
 
-    // Day component without a meal, used when deleting
-    const emptyDayComponent = () => {
-        return (
-            <div className="dayComponent">
-                <Card title={day.dayOfWeek} />
-                <div className="meal-add-button">
-                    <Button onClick={handleAddMeal} />
-                </div>            
-            </div>
-        );
-    };
+  return (
+    <div className="dayComponent">
+      <Card title={day.dayOfWeek} />
+      <h3>Meals:</h3>
+      <ul>
+        {meals.map((meal, index) => (
+          <li key={index}>{meal.name}</li>
+        ))}
+      </ul>
+      
+      <div className="meal-add-button">
+        <Button onClick={handleToggleForm} text={showForm ? "Cancel" : "Add Meal"} />
+      </div>
+      
+      {showForm && <MealForm onAddForm={chooseButtonHandler} />}
 
-    function handleDeleteMeal() {
-        setMeals((prevMeals) => prevMeals.slice(0, -1));
-        isAddButton = true;
-
-        return emptyDayComponent();
-    }
-
-    function chooseButtonHandler() {
-        if (isAddButton) {
-            return handleAddMeal();
-        } else {
-            return handleDeleteMeal();
-        }
-    }
-
-    return (
-        <div className="dayComponent">
-            <Card title={day.dayOfWeek} />            
-            <div className="edit-meal">
-                <Button onClick={chooseButtonHandler}/>
-            </div>            
-        </div>
-    );
-
-    // Old garbage code
-   /* const [meals, setMeals] = useState(day.meals);
-
-    const addMealButton = () => {
-        function handleClick() {
-            // Add meal logic here
-        }
-        
-        let isVisible = true;
-
-        if (meals.length >= 3) {
-            isVisible = false;
-        } 
-
-        function setVisibility(): string {
-            return isVisible ? "visible" : "hidden";
-        }
-
-        return (
-            <div className="add-meal" style={{ visibility: setVisibility() }}>
-                <Button onClick={handleClick} />
-            </div>
-        );
-    } */
-
-    /*return (
-        <div className="dayComponent">
-            <Card title={day}/>
-        </div>
-    );*/
+    </div>
+  );
 }
 
 export default DayComponent;

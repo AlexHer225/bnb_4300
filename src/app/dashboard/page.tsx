@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import Navbar from '../Navbar';
+import Navbar from '../components/Navbar';
 import Plans from '../components/Plans';
 import Day from '../models/daySchema';
 import { mock } from 'node:test';
@@ -30,8 +30,6 @@ const generateDays = () => {
     meals: [mockMeals[index % mockMeals.length]], 
   }));
 }
-
-
 
 export default function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -73,7 +71,7 @@ export default function Dashboard() {
  
   return (
     <div>
-      <Navbar/>
+      <Navbar session={null} />
       <div className="dashboard-container">
         {isLoggedIn ? (
           <>
