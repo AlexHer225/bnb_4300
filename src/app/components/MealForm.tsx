@@ -153,7 +153,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
                 className="user"
             />
 
-            <button type='submit' className='submit-form-button'>
+            <button onClick = {nextPage} type='submit' className='submit-form-button'>
             Create Meal
             </button>
 
