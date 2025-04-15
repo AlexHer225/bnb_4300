@@ -30,20 +30,24 @@ const middleware = async (request: NextRequest) => {
     const { pathname } = request.nextUrl;
     const session = await auth();
     const isAuthenticated = !!session?.user;
-    console.log(isAuthenticated, pathname); 
+    console.log("MIDDLEWARE RAN: ", isAuthenticated, pathname); 
 
     const publicPaths = ["/", "/dashboard", "/signup", "/login"];
 
     if (!isAuthenticated && !publicPaths.includes(pathname)) {
+
         return NextResponse.redirect(new URL("/", request.url));
     }
 
     return NextResponse.next();
- 
+
 };
 
 export const config = {
   matcher: [
+    "/dashboard",
+    "/login",
+    "/signup",
     // "/create-item/:path*",
     // "/update-item/:path*",
     // "/delete-item/:path*",

@@ -4,23 +4,19 @@ import Link from 'next/link';
 import '../../css/nav.css';
 import { Session } from 'next-auth';
 import { doLogout } from '../actions';
-import { useSession, SessionProvider } from 'next-auth/react';
+import { signOut, useSession, SessionProvider } from 'next-auth/react';
  
 interface NavbarProps {
     session: Session | null;
 }
 
-const Navbar = ({session}: NavbarProps) => {
-    const [ isLoggedIn, setIsLoggedIn ] = useState(!!session?.user);
-
-    useEffect(() => {
-        setIsLoggedIn(!!session?.user);
-    }, [session]);
+const Navbar = () => {
+    const { data: session, status } = useSession();
+    const isLoggedIn = !!session?.user;
 
     const handleLogout = () => {
         doLogout();
-        setIsLoggedIn(!!session?.user);
-        window.location.href = '/';
+        window.location.href = "/dashboard";
     }
 
     return (
@@ -33,13 +29,15 @@ const Navbar = ({session}: NavbarProps) => {
     
             {/* Right Side Menu */}
             <div className="content">
-            <Link className="signbutton" href="/signup">Sign Up</Link>
-            {isLoggedIn && session?.user ? (
+            {isLoggedIn ? (
                     <button onClick={handleLogout} className="logbutton">
                     Logout
                     </button>
             ) : (
-                    <Link className="logbutton" href="/login">Login</Link>
+                <>
+                <Link className="signbutton" href="/signup">Sign Up</Link>
+                <Link className="logbutton" href="/login">Login</Link>
+                </>
             )}
             </div>
         </nav>

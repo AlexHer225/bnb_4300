@@ -44,7 +44,8 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             if (response?.error) {
                 throw new Error('Network response was not ok');
             } else {
-                router.push("/dashboard");
+                window.location.href = "/dashboard";
+                // router.push("/dashboard");
             }
         } catch (e: any) {
             console.error(e);
