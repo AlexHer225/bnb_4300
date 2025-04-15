@@ -141,7 +141,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
                 value={formArgs.diets}
                 onChange={handleChange}
                 placeholder="Enter Dietary Specifics"
-                required
+                
                 className="user"
             />
             <input
