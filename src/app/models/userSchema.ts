@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-interface USer extends Document {
+interface IUser extends Document {
     username: string;
     passwordHashed: string;
     excludeCuisine?: string;
@@ -9,7 +9,7 @@ interface USer extends Document {
     excludeIngredients?: string;
 }
 
-const userSchema = new Schema<USer>({
+const userSchema = new Schema<IUser>({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         default: () => new mongoose.Types.ObjectId(),
@@ -37,5 +37,6 @@ const userSchema = new Schema<USer>({
     },
 });
 
-const User: Model<USer> = mongoose.models.User || mongoose.model<USer>("User", userSchema);
+const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>("User", userSchema);
+
 export default User;

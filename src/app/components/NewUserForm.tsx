@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import connectMongoDB from "../../../config/mongodb";
+// import connectMongoDB from "../../../config/mongodb";
 import { useRouter } from 'next/navigation';
 import '../../css/newUserForm.css';
 
@@ -13,14 +13,13 @@ interface input {
     diet: string;
     intolerances: string;
     excludeIngredients: string;
-    
 }
 
 interface newDetailProps{
     onAddForm: (item: input) => void;
 }
 
-export default function NewUser({ onAddForm }:newDetailProps){
+const NewUser = () => {
     const[formArgs, setFormArgs ] = useState({
         userName: '',
         password: '',
@@ -32,34 +31,44 @@ export default function NewUser({ onAddForm }:newDetailProps){
     });
 
     const router = useRouter();
-    const handleSubmit = async (e: React.FormEvent)=>{
+    
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try{
-        const response = await fetch('/api/user', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formArgs),
-          });
-    
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-        setFormArgs({
-        userName: '',
-        password: '',
-        confirmPassword: '',
-        excludeCuisine:'',
-        diet: '',
-        intolerances:'',
-        excludeIngredients:'',});
+            let dbArgs = {
+                username: formArgs.userName,
+                password: formArgs.confirmPassword,
+                excludeCuisine: formArgs.excludeCuisine,
+                diet: formArgs.diet,
+                intolerances: formArgs.intolerances,
+                excludeIngredients: formArgs.excludeIngredients,
+            }
+        
+            const response = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dbArgs),
+            });
+        
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            setFormArgs({
+                userName: '',
+                password: '',
+                confirmPassword: '',
+                excludeCuisine:'',
+                diet: '',
+                intolerances:'',
+                excludeIngredients:'',
+            });
 
-        router.push('../../src/app/page')
+            router.push('../../src/app/page')
         }
         catch(error){
             console.error('Error creating item');
-
         }
 
     }
@@ -158,3 +167,5 @@ export default function NewUser({ onAddForm }:newDetailProps){
         </div>
     );
 }
+
+export default NewUser;

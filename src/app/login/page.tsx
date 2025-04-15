@@ -1,6 +1,6 @@
 'use client';
 import LoginForm from "../components/LoginForm";
-import Navbar from "../Navbar";
+import Navbar from "../components/Navbar";
 
 export default function Login(){
     const handleAddForm = (item: any) => {
@@ -10,7 +10,7 @@ export default function Login(){
     return(
     
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <LoginForm onAddForm={handleAddForm} />
         </>
 
