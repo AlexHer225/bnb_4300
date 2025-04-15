@@ -17,10 +17,9 @@ interface DayComponentProps {
 
 function DayComponent({ day, selectedDay }: DayComponentProps) {
   const [meals, setMeals] = useState(day.meals);
-  const [isAddButton, setIsAddButton] = useState(true); // Converted to state
-  const [showForm, setShowForm] = useState(false); 
+  const [isAddButton, setIsAddButton] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
-  //Show the Meal Form
   function handleToggleForm() {
     setShowForm((prev) => !prev);
   }
@@ -37,7 +36,6 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
 
   function chooseButtonHandler() {
     if (isAddButton) {
-      // fallback: add a dummy meal if no form used
       handleAddMeal({ name: "Spaghetti" });
     } else {
       handleDeleteMeal();
@@ -54,12 +52,18 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
         ))}
       </ul>
       
+      <div className="quick-add-button">
+        {showForm && <MealForm onAddForm={handleAddMeal} />}
+            <Button onClick={chooseButtonHandler} text={isAddButton ? "Quick Add" : "Delete Last"} />
+       </div>
+      
+      
       <div className="meal-add-button">
+        
         <Button onClick={handleToggleForm} text={showForm ? "Cancel" : "Add Meal"} />
       </div>
+        
       
-      {showForm && <MealForm onAddForm={chooseButtonHandler} />}
-
     </div>
   );
 }

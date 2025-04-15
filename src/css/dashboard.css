@@ -175,7 +175,7 @@ body{
     border: none;
     cursor: pointer;
     margin-top: 20px;
-    margin-left: 20%;
+    margin-left: 23%;
     padding-top: 2px;
     max-width: 125px;
 }
@@ -186,6 +186,28 @@ body{
     color: black;
 }
 
+.quick-add-button{
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    width: 60%;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center;
+    margin-left: 23%;
+    padding-top: 2px;
+    max-width: 125px;
+}
 
+.quick-add-button:hover{
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+}
 
 
