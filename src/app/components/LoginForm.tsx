@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import connectMongoDB from "../../../config/mongodb";
 import { useRouter } from 'next/navigation';
 import '../../css/loginForm.css';
+import { doCredentialLogin, doLogout } from '../actions/index';
+
 
 interface loginInput{
     id: number;
@@ -21,31 +23,44 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
     });
 
     const router = useRouter();
-    const handleSubmit = async (e: React.FormEvent)=>{
-        e.preventDefault();
+    async function handleSubmit (event: FormEvent<HTMLFormElement>): Promise<void> {
+        event.preventDefault();
         try{
-        const response = await fetch('/api/user', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formArgs),
-          });
+            let dbArgs = {
+                username: formArgs.userName,
+                hashedPassword: formArgs.password,
+            };
+            const formData = new FormData(event.currentTarget);
+            const response = await doCredentialLogin(formData);
+
+            // const response = await fetch('/api/user', {
+            //     method: 'POST',
+            //     headers: {
+            //     'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(dbArgs),
+            // });
     
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-        setFormArgs({
-        userName: '',
-        password: '',
-        });
-
-        router.push('../../src/app/page')
+            if (response?.error) {
+                throw new Error('Network response was not ok');
+            } else {
+                router.push("/dashboard");
+            }
+        } catch (e: any) {
+            console.error(e);
+            // setError("Check your credentials");
         }
-        catch(error){
-            console.error('Error creating item');
+        //     setFormArgs({
+        //     userName: '',
+        //     password: '',
+        //     });
 
-        }
+        //     router.push('../../src/app/page')
+        // }
+        // catch(error){
+        //     console.error('Error creating item');
+
+        // }
 
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -55,9 +70,18 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
   
           ...prev,
   
-          [name]: name=== 'owner' ? Number(value) : value,
+          [name]: value,
          }));
       };
+        //     const { name, value } = e.target;
+         
+    //     setFormArgs(prev => ({
+  
+    //       ...prev,
+  
+    //       [name]: name=== 'owner' ? Number(value) : value,
+    //      }));
+    //   };
     return(
         <div className = "form-border">
             <div className = "form-block">

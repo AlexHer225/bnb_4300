@@ -1,13 +1,16 @@
 'use client';
-import Image from "next/image";
-import connectMongoDB from "../../config/mongodb";
 import "../css/splash.css";
-import Navbar from './Navbar';    
+import Navbar from './components/Navbar';    
+// import { auth } from "../auth";
 
 export default function Home() {
-  connectMongoDB();
+  // const session = await auth();
   return (
     <div className="splash-container">
+<<<<<<< HEAD
+      {/* <Navbar session={session}/> */}
+=======
+>>>>>>> 316b0653aed81c963ca8054e95c538e150b520ac
      <div className="top-div-splash">
       <h1>ARE YOU</h1>
       <>

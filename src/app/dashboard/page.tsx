@@ -1,5 +1,8 @@
 "use client";
 import React from 'react';
+<<<<<<< HEAD
+import Navbar from '../components/Navbar';
+=======
 import Navbar from '../Navbar';
 import Plans from '../components/Plans';
 import Day from '../models/daySchema';
@@ -31,6 +34,7 @@ const generateDays = () => {
 }
 
 
+>>>>>>> 316b0653aed81c963ca8054e95c538e150b520ac
 
 export default function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
