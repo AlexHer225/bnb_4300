@@ -8,7 +8,6 @@ export default function Login(){
     }
         
     return(
-    
         <>
             <Navbar />
             <LoginForm onAddForm={handleAddForm} />

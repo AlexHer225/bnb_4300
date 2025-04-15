@@ -1,9 +1,9 @@
 import DayComponent from "./DayComponent";
+//import Card from "./Card";
 import "../../css/dashboard.css";
 
 interface PlanProps {
     plan: {
-      _id: string;
       days: {
         _id: string;
         dayOfWeek: string;
@@ -18,6 +18,7 @@ interface PlanProps {
       <div className="plan">
         <h1>Plan</h1>
         {plan.days.map((day) => (
+            //<Card key={day._id} day={day}/>
             <DayComponent key={day._id} day={day} />
         ))}
       </div>
