@@ -5,6 +5,7 @@ import Plans from '../components/Plans';
 import Day from '../models/daySchema';
 import { mock } from 'node:test';
 import '../../css/dashboard.css';
+import { useSession } from 'next-auth/react';
 
 
 //Delete Later
@@ -32,7 +33,10 @@ const generateDays = () => {
 }
 
 export default function Dashboard() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+     const { data: session, status } = useSession();
+     const isLoggedIn = !!session?.user;
+  
+  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [plans, setPlans] = React.useState<any[]>([]); //Saves Plans for Logged In User
   const [newPlan, setNewPlan] = React.useState<any | null>(null); // 7 Day Plan for non authenicated user
 
@@ -71,7 +75,7 @@ export default function Dashboard() {
  
   return (
     <div>
-      <Navbar session={null} />
+      {/* <Navbar session={null} /> */}
       <div className="dashboard-container">
         {isLoggedIn ? (
           <>

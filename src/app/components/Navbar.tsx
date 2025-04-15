@@ -14,10 +14,17 @@ const Navbar = () => {
     const { data: session, status } = useSession();
     const isLoggedIn = !!session?.user;
 
+    // Wait until session status is not loading
+    if (status === "loading") {
+        return null; // or a loading spinner
+    }    
+
     const handleLogout = () => {
         doLogout();
-        window.location.href = "/dashboard";
+        signOut({callbackUrl: "/"});
+        // window.location.href = "/";
     }
+    console.log('session: ', session);
 
     return (
         <nav className="topbar">

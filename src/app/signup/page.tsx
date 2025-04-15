@@ -13,7 +13,7 @@ export default async function SignUpPage() {
     
     return(
         <>
-        <Navbar session={session}/>
+        {/* <Navbar /> */}
         <NewUser />
         </>
     );
