@@ -3,12 +3,13 @@ import "../../css/dashboard.css"
 
 interface ButtonProps {
     onClick: MouseEventHandler<HTMLButtonElement>;
+    text?: string;
 }
 
-function Button({ onClick }: ButtonProps) {
+function Button({ onClick, text }: ButtonProps) {
     return (
         <button onClick = {onClick}>
-            Add Meal
+            {text}
         </button>
     );
 }

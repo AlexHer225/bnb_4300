@@ -1,80 +1,71 @@
-import Card from "./Card"
+import Card from "./Card";
 import Button from "./Button";
-import { useState } from "react";
 import MealForm from "./MealForm";
-
+import { useState } from "react";
 import "../../css/dashboard.css";
 
 interface DayComponentProps {
-    day: {
-        _id: string;
-        dayOfWeek: string;
-        date: Date;
-        meals: { name: string}[];
-      };
+  day: {
+    _id: string;
+    dayOfWeek: string;
+    date: Date;
+    meals: { name: string }[];
+  };
+  onClick: () => void;
+  selectedDay: string | null;
 }
 
-function DayComponent({ day } : DayComponentProps) {
-    const [meals, setMeals] = useState(day.meals);
+function DayComponent({ day, selectedDay }: DayComponentProps) {
+  const [meals, setMeals] = useState(day.meals);
+  const [isAddButton, setIsAddButton] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
-    let isAddButton = true;
+  function handleToggleForm() {
+    setShowForm((prev) => !prev);
+  }
 
-    // Function to handle adding a meal
-    function handleAddMeal(newMeal: {name: string}) {
-        setMeals((prevMeals) => [...prevMeals, newMeal]);
-        isAddButton = false;
-    } 
+  function handleAddMeal(newMeal: { name: string }) {
+    setMeals((prevMeals) => [...prevMeals, newMeal]);
+    setIsAddButton(false);
+  }
 
-    // Day component without a meal, used when deleting
-    const emptyDayComponent = () => {
-        return (
-            <div className="dayComponent">
-              <Card title={day.dayOfWeek} />
-              <h3>Meals:</h3>
-              <ul>
-                {meals.map((meal, index) => (
-                  <li key={index}>{meal.name}</li>
-                ))}
-              </ul>
-              <MealForm
-                onAddForm={(newMeal) => handleAddMeal()}
-              />
-              <Button onClick={chooseButtonHandler}/>
-            </div>
-        );
-    };
+  function handleDeleteMeal() {
+    setMeals((prevMeals) => prevMeals.slice(0, -1));
+    setIsAddButton(true);
+  }
 
-    function handleDeleteMeal() {
-        setMeals((prevMeals) => prevMeals.slice(0, -1));
-        isAddButton = true;
-
-        return emptyDayComponent();
+  function chooseButtonHandler() {
+    if (isAddButton) {
+      handleAddMeal({ name: "Spaghetti" });
+    } else {
+      handleDeleteMeal();
     }
+  }
 
-    function chooseButtonHandler() {
-        if (isAddButton) {
-            return handleAddMeal();
-        } else {
-            return handleDeleteMeal();
-        }
-    }
-
-    return (
-        <div className="dayComponent">
-          <Card title={day.dayOfWeek} />
-          <h3>Meals:</h3>
-          <ul>
-            {meals.map((meal, index) => (
-              <li key={index}>{meal.name}</li>
-            ))}
-          </ul>
-          <MealForm
-            onAddForm={(newMeal) => handleAddMeal()}
-          />
-          
-        <Button onClick={chooseButtonHandler}/>    
-        </div>
-    );
+  return (
+    <div className="dayComponent">
+      <Card title={day.dayOfWeek} />
+      <h3>Meals:</h3>
+      <ul>
+        {meals.map((meal, index) => (
+          <li key={index}>{meal.name}</li>
+        ))}
+      </ul>
+      
+      <div className="quick-add-button">
+        {showForm && <MealForm onAddForm={handleAddMeal} />}
+            <Button onClick={chooseButtonHandler} text={isAddButton ? "Quick Add" : "Delete Last"} />
+       </div>
+      
+      
+      <div className="meal-add-button">
+        
+        <Button onClick={handleToggleForm} text={showForm ? "Cancel" : "Add Meal"} />
+      </div>
+        
+      
+    </div>
+  );
 }
 
 export default DayComponent;

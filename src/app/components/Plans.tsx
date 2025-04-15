@@ -3,9 +3,26 @@ import Button from "./Button";
 import { useState } from "react";
 import '../../css/dashboard.css';
 
+interface Day {
+    _id: string;
+    dayOfWeek: string;
+    date: Date;
+    meals: any[]; 
+}
+
+interface PlanType {
+    _id: string;
+    days: Day[];
+}
+
+interface PlansProps {
+    plansProps: PlanType[];
+}
+
 // Carousel of plans 
-export default function Plans({plansProps}) {
+export default function Plans({plansProps}: PlansProps) {
     const [plans, setPlans] = useState(plansProps);
+    const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
     // IDs are placeholders, change when backend is implemented
     function handleClick () {
@@ -18,19 +35,19 @@ export default function Plans({plansProps}) {
                 meals: [],
             }))
         };
-        setPlans(prev => [...prev, newPlan]);
+        setPlans((prev: PlanType[]) => [...prev, newPlan]);
     }
     
     return (
         <div className="plans">
-            <h1>My Plans</h1>
             <div className="plans-carousel">
-                {plans.map((plan, index) => (
-                    <Plan key={index} plan={plan} />
+                {plans.map((plan: PlanType, index: number) => (
+                    <Plan key={index} plan={plan} selectedDayId={selectedDayId} setSelectedDayId={setSelectedDayId} />
                 ))}
             </div>
-
-            <Button onClick={handleClick}/>
+            <div className="meal-plan-button">   
+                <Button onClick={handleClick} text="Add Week"/>
+            </div> 
         </div>
     );
 }

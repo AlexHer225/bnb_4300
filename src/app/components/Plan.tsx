@@ -1,10 +1,10 @@
 import DayComponent from "./DayComponent";
-import Image from "next/image";
-//import Card from "./Card";
 import "../../css/dashboard.css";
+import { useState } from "react";
 
 interface PlanProps {
     plan: {
+      _id: string;
       days: {
         _id: string;
         dayOfWeek: string;
@@ -12,16 +12,18 @@ interface PlanProps {
         meals: any[]; 
       }[];
     };
+    selectedDayId: string | null;
+    setSelectedDayId: (id: string | null) => void;
   }
   
-  function Plan({ plan }: PlanProps) {
+  function Plan({ plan, selectedDayId, setSelectedDayId }: PlanProps) {
+
+    const [selectedDay, setSelectedDay] = useState<string | null>(null);
+
     return (
-      <div className="plan">
-        <h1>Plan</h1>
-        <Image src="./favicon.ico" alt="Plan Image" />
+      <div className="plan-flex-container">
         {plan.days.map((day) => (
-            //<Card key={day._id} day={day}/>
-            <DayComponent key={day._id} day={day} />
+            <DayComponent key={day._id} day={day} onClick={() => setSelectedDayId(day._id)} selectedDay={selectedDay} />
         ))}
       </div>
     );

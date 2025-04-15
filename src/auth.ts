@@ -27,7 +27,7 @@ export const {
 
           if (user) {
             const isMatch = await bcrypt.compare(
-              credentials.password,
+              typeof credentials.password === "string" ? credentials.password : "",
               user.passwordHashed,
             );
 

@@ -15,7 +15,7 @@ interface input  {
 }
 
 interface newDetailProps{
-    onAddForm: (item: input) => void;
+    onAddForm: (item: { name: string }) => void;
 }
 
 export default function NewUser({ onAddForm }:newDetailProps){
@@ -66,7 +66,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
         window.location.href = './dashboard';
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value, type, checked } = e.target;
+        const { name, value, type, checked } = e.target as HTMLInputElement;
          
         setFormArgs(prev => ({
   
@@ -78,7 +78,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
     return(
         <div className = "form-border">
             <div className = "form-block">
-        <form onSubmit = {handleSubmit} className="form-style">
+        <form onSubmit = {handleSubmit} className="fstyleorm-">
         <h2>Create Meal</h2>
         <img 
         src="/../images/Hangry-Bear-Transparent.png"
