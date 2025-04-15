@@ -11,7 +11,6 @@ interface input  {
     cheap: boolean;
     diets: string;
     summary: string;
-
 }
 
 interface newDetailProps{
@@ -76,9 +75,8 @@ export default function NewUser({ onAddForm }:newDetailProps){
          }));
       };
     return(
-        <div className = "form-border">
-            <div className = "form-block">
-        <form onSubmit = {handleSubmit} className="fstyleorm-">
+    <div className = "meal-form-container">
+        <form onSubmit = {handleSubmit} className="form-style">
         <h2>Create Meal</h2>
         <img 
         src="/../images/Hangry-Bear-Transparent.png"
@@ -159,7 +157,6 @@ export default function NewUser({ onAddForm }:newDetailProps){
 
             
         </form>
-        </div>
         </div>
     );
 }

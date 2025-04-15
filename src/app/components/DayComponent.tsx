@@ -51,19 +51,34 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
           <li key={index}>{meal.name}</li>
         ))}
       </ul>
-      
+
       <div className="quick-add-button">
-        {showForm && <MealForm onAddForm={handleAddMeal} />}
-            <Button onClick={chooseButtonHandler} text={isAddButton ? "Quick Add" : "Delete Last"} />
-       </div>
-      
-      
-      <div className="meal-add-button">
-        
-        <Button onClick={handleToggleForm} text={showForm ? "Cancel" : "Add Meal"} />
+        {showForm && (
+          <div
+            className="meal-form-overlay"
+            onClick={() => setShowForm(false)}
+          >
+            <div
+              className="meal-form-modal"
+              onClick={(e) => e.stopPropagation()} // Prevent click-through
+            >
+              <MealForm onAddForm={handleAddMeal} />
+            </div>
+          </div>
+        )}
+
+        <Button
+          onClick={chooseButtonHandler}
+          text={isAddButton ? "Quick Add" : "Delete Last"}
+        />
       </div>
-        
-      
+
+      <div className="meal-add-button">
+        <Button
+          onClick={handleToggleForm}
+          text={showForm ? "Cancel" : "Add Meal"}
+        />
+      </div>
     </div>
   );
 }
