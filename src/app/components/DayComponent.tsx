@@ -1,8 +1,7 @@
 import Card from "./Card"
 import Button from "./Button";
 import { useState } from "react";
-
-import "../../css/dashboard.css";
+import '../../css/dashboard.css';
 
 interface DayComponentProps {
     day: {
@@ -38,7 +37,7 @@ function DayComponent({ day } : DayComponentProps) {
         return (
             <div className="dayComponent">
                 <Card title={day.dayOfWeek} />
-                <div className="add-meal">
+                <div className="meal-add-button">
                     <Button onClick={handleAddMeal} />
                 </div>            
             </div>

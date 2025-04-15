@@ -3,8 +3,24 @@ import Button from "./Button";
 import { useState } from "react";
 import '../../css/dashboard.css';
 
+interface Day {
+    _id: string;
+    dayOfWeek: string;
+    date: Date;
+    meals: any[]; 
+}
+
+interface PlanType {
+    _id: string;
+    days: Day[];
+}
+
+interface PlansProps {
+    plansProps: PlanType[];
+}
+
 // Carousel of plans 
-export default function Plans({plansProps}) {
+export default function Plans({plansProps}: PlansProps) {
     const [plans, setPlans] = useState(plansProps);
 
     // IDs are placeholders, change when backend is implemented
@@ -18,19 +34,19 @@ export default function Plans({plansProps}) {
                 meals: [],
             }))
         };
-        setPlans(prev => [...prev, newPlan]);
+        setPlans((prev: PlanType[]) => [...prev, newPlan]);
     }
     
     return (
         <div className="plans">
-            <h1>My Plans</h1>
             <div className="plans-carousel">
-                {plans.map((plan, index) => (
+                {plans.map((plan: PlanType, index: number) => (
                     <Plan key={index} plan={plan} />
                 ))}
             </div>
-
-            <Button onClick={handleClick}/>
+            <div className="meal-plan-button">   
+                <Button onClick={handleClick}/>
+            </div> 
         </div>
     );
 }

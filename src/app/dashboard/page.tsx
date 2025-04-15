@@ -24,6 +24,7 @@ const mockMeals = [
 const generateDays = () => {
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   return weekDays.map((day, index) => ({
+    _id: `${Date.now()}-${index}`,
     dayOfWeek: day,
     date: new Date(Date.now() + index * 86400000), 
     meals: [mockMeals[index % mockMeals.length]], 
@@ -42,11 +43,11 @@ export default function Dashboard() {
   //Temporary Plans for Logged In View
   const savedPlans = [
     {
-      title: 'Healthy Week Plan',
+      _id: 'plan-1',
       days: generateDays(),
     },
     {
-      title: 'Cheat Week Plan',
+      _id: 'plan-2',
       days: generateDays(),
     }
   ];
@@ -57,7 +58,7 @@ export default function Dashboard() {
       setNewPlan(null);
     } else {
         setNewPlan({
-          title: 'Demo 7 Day Meal Plan',
+          _id: 'demo-plan',
           days: generateDays(),
         });
     }
@@ -69,7 +70,7 @@ export default function Dashboard() {
       days: generateDays(),
     });
   };
-
+ 
   return (
     <div>
       <Navbar/>
@@ -78,8 +79,7 @@ export default function Dashboard() {
           <>
             <h2 className='header-dashboard'>Your Meal Plans</h2>
             {savedPlans.map((plan, index) => (
-              <Plans key={index} title={plan.title} days={plan.days} />
-            ))}
+              <Plans key={index} plansProps={[plan]} />            ))}
           </>
         ) : (
           <>
@@ -92,7 +92,7 @@ export default function Dashboard() {
               </div>
 
               {newPlan && (
-                <Plans key={newPlan.key} title={newPlan.title} days={newPlan.days} />
+                <Plans plansProps={[newPlan]} />
               )} 
           </>
         )}
