@@ -27,6 +27,20 @@ export default function NewUser({ onAddForm }:newDetailProps){
         diets:'',
         summary:'',
     });
+
+    const handleSubmitTemp = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        onAddForm({ name: formArgs.title });
+        setFormArgs({
+            title: '',
+            image: '',
+            readyInMinutes: 0,
+            sourceUrl:'',
+            cheap: false,
+            diets:'',
+            summary:'',});
+    };
     
 
     const router = useRouter();
@@ -44,7 +58,9 @@ export default function NewUser({ onAddForm }:newDetailProps){
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-        setFormArgs({
+
+          onAddForm({ name: formArgs.title });
+          setFormArgs({
             title: '',
             image: '',
             readyInMinutes: 0,
@@ -53,7 +69,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
             diets:'',
             summary:'',});
 
-        router.push('../../src/app/page')
+        //router.push('../../src/app/page')
         }
         catch(error){
             console.error('Error creating meal');
@@ -76,7 +92,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
       };
     return(
     <div className = "meal-form-container">
-        <form onSubmit = {handleSubmit} className="form-style">
+        <form onSubmit = {handleSubmitTemp} className="form-style">
         <h2>Create Meal</h2>
         <img 
         src="/../images/Hangry-Bear-Transparent.png"
@@ -151,7 +167,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
                 className="user"
             />
 
-            <button onClick = {nextPage} type='submit' className='submit-form-button'>
+            <button type='submit' className='submit-form-button'>
             Create Meal
             </button>
 
