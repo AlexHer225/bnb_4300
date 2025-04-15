@@ -29,6 +29,7 @@ const NewUser = () => {
         intolerances:'',
         excludeIngredients:'',
     });
+    
 
     const router = useRouter();
     

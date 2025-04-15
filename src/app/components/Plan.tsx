@@ -1,4 +1,5 @@
 import DayComponent from "./DayComponent";
+import "../../css/dashboard.css";
 
 interface PlanProps {
     plan: {

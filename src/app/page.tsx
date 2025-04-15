@@ -7,7 +7,10 @@ export default function Home() {
   // const session = await auth();
   return (
     <div className="splash-container">
+<<<<<<< HEAD
       {/* <Navbar session={session}/> */}
+=======
+>>>>>>> 316b0653aed81c963ca8054e95c538e150b520ac
      <div className="top-div-splash">
       <h1>ARE YOU</h1>
       <>
