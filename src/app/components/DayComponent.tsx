@@ -50,13 +50,12 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
       <h3>Meals</h3>
       <ul>
         {meals.map((meal, index) => (
-          <>
           <Meal 
             key={index}
             title={meal.title} 
             image={meal.image} 
           />
-          </>
+
         ))}
       </ul>
 
