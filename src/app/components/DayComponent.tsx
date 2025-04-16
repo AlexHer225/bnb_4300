@@ -3,6 +3,7 @@ import Button from "./Button";
 import MealForm from "./MealForm";
 import { useState } from "react";
 import "../../css/dashboard.css";
+import NewUser from "./MealForm";
 
 interface DayComponentProps {
   day: {
@@ -64,7 +65,7 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
               className="meal-form-modal"
               onClick={(e) => e.stopPropagation()} // Prevent click-through
             >
-              <MealForm onAddForm={handleAddMeal} />
+              <NewUser onAddForm={handleAddMeal} />
             </div>
           </div>
         )}
