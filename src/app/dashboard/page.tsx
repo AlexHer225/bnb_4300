@@ -34,7 +34,7 @@ const generateDays = () => {
 
 export default function Dashboard() {
      const { data: session, status } = useSession();
-     const isLoggedIn = !!session?.user;
+     const isLoggedIn = true; //!!session?.user;
   
   // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [plans, setPlans] = React.useState<any[]>([]); //Saves Plans for Logged In User
