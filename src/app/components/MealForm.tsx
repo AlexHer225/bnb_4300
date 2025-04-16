@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import '../../css/newUserForm.css';
 
 interface input  {
@@ -43,8 +42,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
     };
     
 
-    const router = useRouter();
-    const handleSubmit = async (e: React.FormEvent)=>{
+ /*   const handleSubmit = async (e: React.FormEvent)=>{
         e.preventDefault();
         try{
         const response = await fetch('/api/meals', {
@@ -76,10 +74,8 @@ export default function NewUser({ onAddForm }:newDetailProps){
 
         }
 
-    }
-    const nextPage = () =>{
-        window.location.href = './dashboard';
-    }
+    } */
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type, checked } = e.target as HTMLInputElement;
          
