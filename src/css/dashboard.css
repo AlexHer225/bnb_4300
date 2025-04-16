@@ -54,6 +54,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 4%;
+    margin-bottom: 2rem;
 }
 
 .plans-title{
@@ -61,6 +63,13 @@ body{
     font-family: 'Nunito Sans', sans-serif;
     margin-top: 20px;
     font-size: 20px;
+}
+
+.plans-carousel{
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
 }
 
 .plan-container{
@@ -73,36 +82,45 @@ body{
 
 
 .card {
+    display: flex;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 300px;
-    min-width: 150px;
-    margin: 16px;
-    height: 200px;
+    min-width: 200px;
+    min-height: 300px;
+    margin: 0px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     background: #324732;
-    margin: 0;
+    gap: 20px;
+    height: 100%;
+    margin: 16px;
 }
 
 .card-content {
     display: flex;
     flex-direction: column; 
-    align-items: center; 
-    gap: 8px; 
-    color: #F5F1E3;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 16px;
+    height: 100%;
+    width: 100%;
 }
 
 .card h1{
     color: #F5F1E3;
-    font-size: 20px;
-    font-family: 'Nunito Sans', sans-serif;
-    margin-bottom: 50px;
+    font-size: 25px;
+    font: 'Poppins';
+    margin-bottom: 10px;
+    padding-top: 15px;
 }
 
 .plan-flex-container{
@@ -171,20 +189,25 @@ body{
     font-family: 'Nunito Sans', sans-serif;
 }
 
+.button-wrapper {
+    margin-top: 40px; /* Pushes this block to the bottom */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* space between buttons */
+    align-self: flex-end;
+}
+
 .meal-add-button{
     background-color: #5D5D5D;
     color: #F5F1E3;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 20px;
-    width: 60%;
+    width: 120px;
     height: 35px;
-    text-align: center;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    margin-top: 20px;
-    margin-left: 18.5%;
-    padding-top: 2px;
+    /* margin-top: 10px; */
+    align-self: center;
+    padding: 5px;
     max-width: 125px;
 }
 
@@ -197,19 +220,25 @@ body{
 .quick-add-button{
     background-color: #5D5D5D;
     color: #F5F1E3;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 20px;
-    width: 60%;
+    width: 120px;
     height: 35px;
-    text-align: center;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     align-self: center;
-    margin-left: 18.5%;
-    padding-top: 2px;
+    padding: 5px;
     max-width: 125px;
+}
+
+
+.quick-add-button .button-text,
+.meal-add-button .button-text{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 17px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
 }
 
 .quick-add-button:hover{

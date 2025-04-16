@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Plans from '../components/Plans';
 import Day from '../models/daySchema';
@@ -7,43 +7,47 @@ import { mock } from 'node:test';
 import '../../css/dashboard.css';
 import { useSession } from 'next-auth/react';
 
-
-//Delete Later
-//Temporary meals just to store for demo
-const mockMeals = [
-  {name: 'Pasta'},
-  {name: 'Salad'},
-  {name: 'Pizza'},
-  {name: 'Sushi'},
-  {name: 'Tacos'},
-  {name: 'Burger'},
-];
-
-
-//Delete Later
-//Temporary days for 7 day plan
-const generateDays = () => {
-  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  return weekDays.map((day, index) => ({
-    _id: `${Date.now()}-${index}`,
-    dayOfWeek: day,
-    date: new Date(Date.now() + index * 86400000), 
-    meals: [mockMeals[index % mockMeals.length]], 
-  }));
-}
+type Meal = {
+  _id: string;
+  title: string;
+  image: string;
+  readyInMinutes: number;
+  sourceUrl: string;
+  cheap: boolean;
+  diets: string[];
+  summary: string;
+  __v: number;
+};
 
 export default function Dashboard() {
-     const { data: session, status } = useSession();
-     const isLoggedIn = true; //!!session?.user;
-  
-  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [plans, setPlans] = React.useState<any[]>([]); //Saves Plans for Logged In User
-  const [newPlan, setNewPlan] = React.useState<any | null>(null); // 7 Day Plan for non authenicated user
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user;
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [plans, setPlans] = useState<any[]>([]);
+  const [newPlan, setNewPlan] = useState<any | null>(null);
 
-  const planDays = generateDays(); 
+  // Generates days based on meals
+  const generateDays = () => {
+    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return weekDays.map((day, index) => ({
+      _id: `${Date.now()}-${index}`,
+      dayOfWeek: day,
+      date: new Date(Date.now() + index * 86400000),
+      meals: meals.length ? [meals[index % meals.length]] : [],
+    }));
+  };
 
-  //Temporary Plans for Logged In View
-  const savedPlans = [
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const res = await fetch('/data/demoMeals.json');
+      const data = await res.json();
+      console.log('Fetched meals:', data); 
+      setMeals(data);
+    };
+    fetchMeals();
+  }, []);
+
+  const savedPlans = meals.length ? [
     {
       _id: 'plan-1',
       days: generateDays(),
@@ -52,27 +56,28 @@ export default function Dashboard() {
       _id: 'plan-2',
       days: generateDays(),
     }
-  ];
+  ] : [];
 
-  //Toggle the button
   const handleTogglePlan = () => {
-    if(newPlan) {
+    if (newPlan) {
       setNewPlan(null);
-    } else {
-        setNewPlan({
-          _id: 'demo-plan',
-          days: generateDays(),
-        });
+    } else if (meals.length) { // Only allow creating a plan if meals are fetched
+      setNewPlan({
+        _id: 'demo-plan',
+        days: generateDays(),
+      });
     }
-  }
+  };
 
   const handleAddNewPlan = () => {
-    setNewPlan({
-      title: 'Demo 7 Day Meal Plan',
-      days: generateDays(),
-    });
+    if (meals.length) { // Only allow creating a new plan if meals are fetched
+      setNewPlan({
+        title: 'Demo 7 Day Meal Plan',
+        days: generateDays(),
+      });
+    }
   };
- 
+
   return (
     <div>
       {/* <Navbar session={null} /> */}
@@ -92,10 +97,11 @@ export default function Dashboard() {
                   {newPlan ? 'Remove Meal Plan -' : 'Create 7 Day Meal Plan +'}
                 </button>
               </div>
-
+              <div className='plan-container'>
               {newPlan && (
-                <Plans plansProps={[newPlan]} />
+                  <Plans plansProps={[newPlan]} />
               )} 
+              </div>
           </>
         )}
       </div>

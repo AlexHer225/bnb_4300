@@ -9,7 +9,7 @@ interface ButtonProps {
 function Button({ onClick, text }: ButtonProps) {
     return (
         <button onClick = {onClick}>
-            {text}
+            <div className="button-text">{text}</div>
         </button>
     );
 }

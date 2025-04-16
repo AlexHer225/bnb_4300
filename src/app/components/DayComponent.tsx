@@ -4,13 +4,14 @@ import MealForm from "./MealForm";
 import { useState } from "react";
 import "../../css/dashboard.css";
 import NewUser from "./MealForm";
+import Meal from "./Meal";
 
 interface DayComponentProps {
   day: {
     _id: string;
     dayOfWeek: string;
     date: Date;
-    meals: { name: string }[];
+    meals: { title: string, image: string }[];
   };
   onClick: () => void;
   selectedDay: string | null;
@@ -25,7 +26,7 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
     setShowForm((prev) => !prev);
   }
 
-  function handleAddMeal(newMeal: { name: string }) {
+  function handleAddMeal(newMeal: { title: string, image: string }) {
     setMeals((prevMeals) => [...prevMeals, newMeal]);
     setIsAddButton(false);
   }
@@ -37,7 +38,7 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
 
   function chooseButtonHandler() {
     if (isAddButton) {
-      handleAddMeal({ name: "Spaghetti" });
+      handleAddMeal({ title: "Spaghetti", image: "https://img.spoonacular.com/recipes/1096014-312x231.jpg" });
     } else {
       handleDeleteMeal();
     }
@@ -46,16 +47,19 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
   return (
     <div className="dayComponent">
       <Card title={day.dayOfWeek}>
-        <h3>Meals:</h3>
-        <ul>
-            {meals.map((meal, index) => (
-                <li key={index}>{meal.name}</li>
-            ))}
-        </ul> 
-        </Card>
-      
-      
-      <div className="quick-add-button">
+      <h3>Meals</h3>
+      <ul>
+        {meals.map((meal, index) => (
+          <>
+          <Meal 
+            key={index}
+            title={meal.title} 
+            image={meal.image} 
+          />
+          </>
+        ))}
+      </ul>
+
         {showForm && (
           <div
             className="meal-form-overlay"
@@ -69,7 +73,8 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
             </div>
           </div>
         )}
-
+      <div className="button-wrapper">
+      <div className="quick-add-button">
         <Button
           onClick={chooseButtonHandler}
           text={isAddButton ? "Quick Add" : "Delete Last"}
@@ -82,6 +87,8 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
           text={showForm ? "Cancel" : "Add Meal"}
         />
       </div>
+      </div>
+      </Card>
     </div>
   );
 }

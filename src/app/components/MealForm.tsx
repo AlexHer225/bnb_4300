@@ -13,7 +13,7 @@ interface input  {
 }
 
 interface newDetailProps{
-    onAddForm: (item: { name: string }) => void;
+    onAddForm: (item: { title: string, image: string }) => void;
 }
 
 export default function NewUser({ onAddForm }:newDetailProps){
@@ -30,7 +30,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
     const handleSubmitTemp = (e: React.FormEvent) => {
         e.preventDefault();
 
-        onAddForm({ name: formArgs.title });
+        onAddForm({ title: formArgs.title, image: formArgs.image });
         setFormArgs({
             title: '',
             image: '',
