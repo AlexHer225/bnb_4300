@@ -89,7 +89,7 @@ export default function NewUser({ onAddForm }:newDetailProps){
     return(
     <div className = "meal-form-container">
         <form onSubmit = {handleSubmitTemp} className="form-style">
-        <h2>Create Meal</h2>
+        {/* <h2>Create Meal</h2> */}
         <img 
         src="/../images/Hangry-Bear-Transparent.png"
         alt="Hangry Logo"
