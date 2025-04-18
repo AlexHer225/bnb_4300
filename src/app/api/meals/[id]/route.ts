@@ -20,7 +20,8 @@ export async function PUT(request:NextRequest, { params}:RouteParams ) {
   export async function GET(request:NextRequest, { params }:RouteParams) {
     const { id } = await params;
     await connectMongoDB();
-    const meal = await Meal.findOne({_id: id});
+    const objectId = new mongoose.Types.ObjectId(id); 
+    const meal = await Meal.findOne({_id: objectId});
     return NextResponse.json({meal}, { status: 200 });
   }
   

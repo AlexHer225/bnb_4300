@@ -6,6 +6,7 @@ import Day from '../models/daySchema';
 import { mock } from 'node:test';
 import '../../css/dashboard.css';
 import { useSession } from 'next-auth/react';
+import MealInfo from '../components/MealInfo';
 
 type Meal = {
   _id: string;
@@ -78,6 +79,15 @@ export default function Dashboard() {
     }
   };
 
+  const [selectedMealId, setSelectedMealId] = useState<string | null>(null);
+
+  const handleSelectMeal = (mealId: string) => {
+    setSelectedMealId(mealId);
+  }
+  const handleBack = () => {
+    setSelectedMealId(null);
+  }
+  
   return (
     <div>
       {/* <Navbar session={null} /> */}
@@ -102,6 +112,8 @@ export default function Dashboard() {
                   <Plans plansProps={[newPlan]} />
               )} 
               </div>
+              {/* add modal here */}
+              {selectedMealId &&  <MealInfo id={selectedMealId} />}
           </>
         )}
       </div>

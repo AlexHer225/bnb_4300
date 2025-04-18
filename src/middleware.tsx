@@ -30,7 +30,7 @@ const middleware = async (request: NextRequest) => {
     const { pathname } = request.nextUrl;
     const session = await auth();
     const isAuthenticated = !!session?.user;
-    console.log("MIDDLEWARE RAN: ", isAuthenticated, pathname); 
+    // console.log("MIDDLEWARE RAN: ", isAuthenticated, pathname); 
 
     const publicPaths = ["/", "/dashboard", "/signup", "/login"];
 
