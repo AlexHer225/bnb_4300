@@ -6,16 +6,27 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
     await connectMongoDB();
-    const meals = await Meal.find();
+
+    const url = new URL(request.url);
+    var size = null;
+    if (url.searchParams)
+        size = url.searchParams.get('size');
+    var meals = null;
+    if (size && !isNaN(size)) {
+        meals = await Meal.aggregate([{ $sample: { size: Number(size) }}]);
+    } else {
+        meals = await Meal.find();
+    }
+
     return NextResponse.json({meals});
 }
+
 
 export async function POST(request: NextRequest) {
     const { search, cuisine, diet, intolerances, includeIngredients, maxReadyTime, maxPrice } = await request.json();
     const id = new mongoose.Types.ObjectId();
 
     const apiKey = '1f610de2a16e4a07b958e9335c928208';
-    // console.log('ABOUT TO REQUEST MEAL WITH SEARCH: ', search);
     const params = new URLSearchParams({
         apiKey,
         ...({addRecipeInformation: true}),
@@ -30,7 +41,6 @@ export async function POST(request: NextRequest) {
       });
     
     const spoonacularUrl = `https://api.spoonacular.com/recipes/complexSearch?${params.toString()}`;
-    // console.log('spoonacular url: ', spoonacularUrl);
     const response = await fetch(spoonacularUrl);
     const data = await response.json();
     const newMeal = await data.results[0];

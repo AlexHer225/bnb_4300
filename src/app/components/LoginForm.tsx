@@ -32,37 +32,15 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             };
             const formData = new FormData(event.currentTarget);
             const response = await doCredentialLogin(formData);
-
-            // const response = await fetch('/api/user', {
-            //     method: 'POST',
-            //     headers: {
-            //     'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(dbArgs),
-            // });
     
             if (response?.error) {
                 throw new Error('Network response was not ok');
             } else {
                 window.location.href = "/dashboard";
-                // router.push("/dashboard");
             }
         } catch (e: any) {
             console.error(e);
-            // setError("Check your credentials");
         }
-        //     setFormArgs({
-        //     userName: '',
-        //     password: '',
-        //     });
-
-        //     router.push('../../src/app/page')
-        // }
-        // catch(error){
-        //     console.error('Error creating item');
-
-        // }
-
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -74,16 +52,8 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
           [name]: value,
          }));
       };
-        //     const { name, value } = e.target;
-         
-    //     setFormArgs(prev => ({
-  
-    //       ...prev,
-  
-    //       [name]: name=== 'owner' ? Number(value) : value,
-    //      }));
-    //   };
-    return(
+
+      return(
         <div className = "form-border">
             <div className = "form-block">
         <form onSubmit = {handleSubmit} className="form-style">

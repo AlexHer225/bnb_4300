@@ -1,9 +1,9 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface PLan extends Document {
-    title: string;
+    name: string;
     days?: [{type: mongoose.Schema.Types.ObjectId, ref: 'Day'}];
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'};
+    user?: {type: mongoose.Schema.Types.ObjectId, ref: 'User'};
 }
 
 const planSchema = new Schema<PLan>({
@@ -12,7 +12,7 @@ const planSchema = new Schema<PLan>({
         default: () => new mongoose.Types.ObjectId(),
         required: true,
     },
-    title: {
+    name: {
         type: String,
         required: true,
     },

@@ -1,36 +1,53 @@
 import Card from "./Card";
 import Button from "./Button";
 import MealForm from "./MealForm";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import "../../css/dashboard.css";
-import NewUser from "./MealForm";
+// import NewUser from "./MealForm";
 import Meal from "./Meal";
 import mongoose from "mongoose";
+import { clear } from "console";
 
 interface DayComponentProps {
-  day: {
-    _id: string;
-    dayOfWeek: string;
-    date: Date;
-    meals: { _id: string, title: string, image: string }[];
-  };
-  onClick: () => void;
-  selectedDay: string | null;
+  id: string,
+  dayOfWeek?: string;
+  date?: Date;
+  meals?: MealProps[];
 }
 
-function DayComponent({ day, selectedDay }: DayComponentProps) {
-  const [meals, setMeals] = useState(day.meals);
+interface MealProps {
+  _id: string,
+  title: string,
+  image: string
+}
+
+export default function DayComponent({id}: DayComponentProps) {
+// const DayComponent: React.FC<DayComponentProps> = ({ id }) => {
+// function DayComponent({ day, selectedDay }: DayComponentProps) {
+  const [day, setDay] = useState<DayComponentProps | null>(null);
+  const [meals, setMeals] = useState<MealProps[]>([]);
   const [isAddButton, setIsAddButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  // console.log('MEALS IN DAY COMPONENT: ', meals);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(`/api/days/${id}`, { method: 'GET' });
+        const data = await res.json();
+        const tempDay = data.day;
+        setDay(tempDay);
+      } catch (err) {
+        console.error('Error fetching meal:', err);
+      }
+    })();
+  }, []);
 
   function handleToggleForm() {
     setShowForm((prev) => !prev);
   }
 
   function handleAddMeal(newMeal: { _id: string, title: string, image: string }) {
-    setMeals((prevMeals) => [...prevMeals, newMeal]);
+    setMeals([...meals, newMeal]);
     setIsAddButton(false);
   }
 
@@ -39,24 +56,26 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
     setIsAddButton(true);
   }
 
-  function chooseButtonHandler() {
+  async function chooseButtonHandler() {
     if (isAddButton) {
-      handleAddMeal({ _id: "67f68eb0e10c0a544cd90ef2", title: "Pasta with Tuna", image: "https://img.spoonacular.com/recipes/654959-312x231.jpg" });
+      const response = await fetch('/api/meals?size=1', { method: 'GET' });
+      const wrappedMeal = await response.json(); 
+      const randomMeal = wrappedMeal.meals[0];
+      handleAddMeal(randomMeal);
     } else {
       handleDeleteMeal();
     }
   }
-
+  
+  if (!day) return <div>Loading Day...</div>;
   return (
     <div className="dayComponent">
       <Card title={day.dayOfWeek}>
         <h3>Meals</h3>
         <ul>
-          {meals.map((meal, index) => (
+          {meals?.map((meal) => (
             <Meal 
-              key={index}
-              // title={meal.title} 
-              // image={meal.image}
+              key={meal._id}
               id={meal._id} 
             />
           ))}
@@ -71,7 +90,7 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
                 className="meal-form-modal"
                 onClick={(e) => e.stopPropagation()} // Prevent click-through
               >
-                <NewUser onAddForm={handleAddMeal} />
+                <MealForm onAddForm={handleAddMeal} closeForm={() => setShowForm(false)}/>
               </div>
             </div>
           )}
@@ -95,5 +114,3 @@ function DayComponent({ day, selectedDay }: DayComponentProps) {
     </div>
   );
 }
-
-export default DayComponent;
