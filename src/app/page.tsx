@@ -1,10 +1,13 @@
 'use client';
+import { useSession } from "next-auth/react";
 import "../css/splash.css";
 import Navbar from './components/Navbar';    
 // import { auth } from "../auth";
 
 export default function Home() {
-  // const session = await auth();
+  const { data: session, status } = useSession();
+  const isLoggedIn = !!session?.user;
+
   return (
     <div className="splash-container">
       {/* <Navbar session={session}/> */}
@@ -18,21 +21,21 @@ export default function Home() {
         height={400}
         />
       </>
-      <div className="splash-buttons-flex"> 
-        <button
-         className="splash-button-signup"
-         onClick={() => {
-          window.location.href = "/signup"
-         }}
-         >SIGN UP</button>
-        <button 
-          className="splash-button-login"
+      {!isLoggedIn && 
+        <div className="splash-buttons-flex"> 
+          <button
+          className="splash-button-signup"
           onClick={() => {
-            window.location.href = "/login";
+            window.location.href = "/signup"
           }}
-        >LOGIN</button>
-
-      </div>
+          >SIGN UP</button>
+          <button 
+            className="splash-button-login"
+            onClick={() => {
+              window.location.href = "/login";
+            }}
+          >LOGIN</button>
+        </div> }
      </div>
       <div className="middle-div-splash">
         <h1>Use Hangry Yourself</h1>

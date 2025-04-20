@@ -22,7 +22,7 @@ interface MealInfoProps {
 }
 
 function MealInfo({ meal, onClose }: MealInfoProps ) {
-    connectMongoDB;
+    // connectMongoDB;
     return (
         <>
             <div className="meal-modal-overlay" onClick={onClose}>
@@ -37,7 +37,7 @@ function MealInfo({ meal, onClose }: MealInfoProps ) {
                     </div>
                     
                     <div className="meal-info-item">
-                        <dt><strong>Cheap:</strong></dt>
+                        <dt><strong>Budget Friendly?</strong></dt>
                         <dd>{meal.cheap ? 'Yes' : 'No'}</dd>
                     </div>
                     

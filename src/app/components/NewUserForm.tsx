@@ -6,6 +6,7 @@ import '../../css/newUserForm.css';
 
 interface input {
     id: number;
+    name: string;
     userName: string;
     password: string;
     confirmPassword: string;
@@ -21,6 +22,8 @@ interface newDetailProps{
 
 const NewUser = () => {
     const[formArgs, setFormArgs ] = useState({
+        firstName: '',
+        lastName: '',
         userName: '',
         password: '',
         confirmPassword: '',
@@ -37,6 +40,7 @@ const NewUser = () => {
         e.preventDefault();
         try{
             let dbArgs = {
+                name: formArgs.firstName + ' ' + formArgs.lastName,
                 username: formArgs.userName,
                 password: formArgs.confirmPassword,
                 excludeCuisine: formArgs.excludeCuisine,
@@ -57,6 +61,8 @@ const NewUser = () => {
                 throw new Error('Network response was not ok');
             }
             setFormArgs({
+                firstName: '',
+                lastName: '',
                 userName: '',
                 password: '',
                 confirmPassword: '',
@@ -83,6 +89,7 @@ const NewUser = () => {
           [name]: value,
          }));
       };
+
     return(
         <div className = "form-border">
             <div className = "form-block">
@@ -94,6 +101,24 @@ const NewUser = () => {
         width={400}
         height={400}
         />
+            <input
+                name = "firstName"
+                type="string"
+                value={formArgs.firstName}
+                onChange={handleChange}
+                placeholder="Enter First Name"
+                required
+                className="user"
+            />
+            <input
+                name = "lastName"
+                type="string"
+                value={formArgs.lastName}
+                onChange={handleChange}
+                placeholder="Enter Last Name"
+                required
+                className="user"
+            />
             <input
                 name = "userName"
                 type="string"

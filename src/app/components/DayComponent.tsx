@@ -67,7 +67,7 @@ export default function DayComponent({id}: DayComponentProps) {
     }
   }
   
-  if (!day) return <div>Loading Day...</div>;
+  if (!day) return;
   return (
     <div className="dayComponent">
       <Card title={day.dayOfWeek}>

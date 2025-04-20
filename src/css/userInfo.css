@@ -1,0 +1,78 @@
+/* Apply full background color to page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #324732;
+    font-family: sans-serif;
+  }
+  
+  /* Wrapper to push content downward */
+  .user-info-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 180px; /* move content downward */
+    min-height: 100vh;
+  }
+  
+  /* User info box */
+  .user-info {
+    background-color: #324732;
+    color: #F5F1E3;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    border: none;
+    outline: none;
+  }
+  
+  /* Title */
+  .user-title-info {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Info list */
+  .user-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+/* Row layout */
+.user-info-item,
+.meal-info-item {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px;
+  gap: 64px; /* increased from 48px for more horizontal spacing */
+  font-size: 1rem;
+}
+  
+  /* Label styling */
+  dt {
+    font-weight: bold;
+    width: 160px;
+    text-align: left;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  
+  /* Value styling */
+  dd {
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+    max-width: 240px;
+    word-break: break-word;
+  }
+  

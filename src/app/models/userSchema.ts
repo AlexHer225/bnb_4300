@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface IUser extends Document {
+    name: string;
     username: string;
     passwordHashed: string;
     excludeCuisine?: string;
@@ -16,6 +17,10 @@ const userSchema = new Schema<IUser>({
         required: true,
     },
     username: {
+        type: String,
+        required: true,
+    },
+    name: {
         type: String,
         required: true,
     },
