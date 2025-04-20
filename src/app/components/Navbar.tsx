@@ -2,17 +2,35 @@
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
 import '../../css/nav.css';
-import { Session } from 'next-auth';
 import { doLogout } from '../actions';
 import { signOut, useSession, SessionProvider } from 'next-auth/react';
- 
-interface NavbarProps {
-    session: Session | null;
-}
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+    const [ name, setName ] = useState<string>('');
+    const [showUser, setShowUser] = useState<boolean>(true);
     const { data: session, status } = useSession();
     const isLoggedIn = !!session?.user;
+
+    useEffect(() => {
+        const getUser = async () => {
+            const response = await fetch(`api/users/${session?.user?.id}`);
+            const user = await response.json();
+            setName(user.user.name);
+        };
+        if (session?.user?.id) {
+            getUser();
+        }
+    }, [session]);
+
+    const pathname = usePathname();
+    useEffect(() => {
+        if (pathname === '/user-info') {
+            setShowUser(false);
+        } else {
+            setShowUser(true);
+        }
+    }, [pathname]);
 
     // Wait until session status is not loading
     if (status === "loading") {
@@ -22,9 +40,9 @@ const Navbar = () => {
     const handleLogout = () => {
         doLogout();
         signOut({callbackUrl: "/"});
-        // window.location.href = "/";
     }
-    console.log('session: ', session);
+    // console.log('session: ', session);
+    // console.log('user: ', session?.user );
 
     return (
         <nav className="topbar">
@@ -37,9 +55,16 @@ const Navbar = () => {
             {/* Right Side Menu */}
             <div className="content">
             {isLoggedIn ? (
-                    <button onClick={handleLogout} className="logbutton">
-                    Logout
-                    </button>
+                    <>
+                        {showUser && 
+                            <Link className="namebutton" href="/user-info">
+                                {name}
+                            </Link>
+                        }   
+                        <button onClick={handleLogout} className="logbutton">
+                            Logout
+                        </button>
+                    </>
             ) : (
                 <>
                 <Link className="signbutton" href="/signup">Sign Up</Link>

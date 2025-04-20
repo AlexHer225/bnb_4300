@@ -49,13 +49,25 @@
     margin-left: 0;
     cursor: pointer;
 }
+.namebutton{
+    display: flex;
+    padding: 0.3rem 0.9rem;
+    background-color: #94A864;
+    border-radius: 9px;
+    align-items: center;
+    margin-left: 0;
+    cursor: pointer;
+}
 
 .logbutton:hover{
     background-color: #324732;
     transform: translateY(-2px)
 }
-
 .signbutton:hover{
+    background-color: #324732;
+    transform: translateY(-2px)
+}
+.namebutton:hover{
     background-color: #324732;
     transform: translateY(-2px)
 }
