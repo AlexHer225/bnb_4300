@@ -14,9 +14,10 @@ interface input  {
 
 interface newDetailProps{
     onAddForm: (item: { title: string, image: string, _id: string }) => void;
+    closeForm: () => void;
 }
 
-export default function MealForm ({ onAddForm }:newDetailProps) {
+export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
     const[formArgs, setFormArgs ] = useState({
         search: '',
         cuisine: '',
@@ -57,6 +58,7 @@ export default function MealForm ({ onAddForm }:newDetailProps) {
             const newMeal = await response.json();
 
             onAddForm({ title: newMeal.title, image: newMeal.image, _id: newMeal._id });
+            closeForm();
 
             // Clear the form
             setFormArgs({

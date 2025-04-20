@@ -1,52 +1,73 @@
 import Plan from "./Plan";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../../css/dashboard.css';
 
 interface Day {
     _id: string;
     dayOfWeek: string;
-    date: Date;
-    meals: any[]; 
-}
-
-interface PlanType {
-    _id: string;
-    days: Day[];
 }
 
 interface PlansProps {
     plansProps: PlanType[];
 }
 
+interface PlanType {
+    _id: string;
+    days: string[];
+  }
+  
+
 // Carousel of plans 
 export default function Plans({plansProps}: PlansProps) {
-    const [plans, setPlans] = useState(plansProps);
+    const [plans, setPlans] = useState<PlanType[]>([]);
     const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
-    // IDs are placeholders, change when backend is implemented
-    function handleClick () {
-        const newPlan = {
-            _id: `${Date.now()}`,
-            days: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"].map((day, index) => ({
-                _id: `${Date.now()}-${index}`,
-                dayOfWeek: day,
-                date: new Date(),
-                meals: [],
-            }))
-        };
-        setPlans((prev: PlanType[]) => [...prev, newPlan]);
-    }
-    
+    useEffect(() => {
+        setPlans([...plans, ...plansProps]);
+        // console.log('SET PLANS: ', [...plans, ...plansProps]);
+    }, [plansProps]);
+
+    async function handleAddWeek () {
+        const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var days: Day[] = [];
+        for (let i = 0; i < 7; i++ ) {
+            let response = await fetch(`api/days/${weekDays[i]}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                dayOfWeek: weekDays[i],
+                // date: '',
+            //   meals: meals[i],
+            })
+            });
+            const day: Day = await response.json();
+            days = [...days, day];
+        }
+        const dayIds = days.map(day => String(day._id));
+
+        const planResponse = await fetch('/api/plans/', {
+          method: "POST",
+          body: JSON.stringify({
+            days: dayIds,
+            name: 'Custom Plan',
+          }),
+        });
+        
+        const defaultPlan = await planResponse.json();
+  
+        const plansProps = { _id: defaultPlan, days: dayIds };
+        setPlans([...plans, plansProps]);
+      }
+
     return (
         <div className="plans">
             <div className="plans-carousel">
                 {plans.map((plan: PlanType, index: number) => (
-                    <Plan key={index} plan={plan} selectedDayId={selectedDayId} setSelectedDayId={setSelectedDayId} />
+                    <Plan key={index} planData={plan} selectedDayId={selectedDayId} setSelectedDayId={setSelectedDayId} />
                 ))}
             </div>
             <div className="meal-plan-button">   
-                <Button onClick={handleClick} text="Add Week"/>
+                <Button onClick={handleAddWeek} text="Add Week"/>
             </div> 
         </div>
     );

@@ -11,11 +11,18 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const { dayOfWeek, date, meals } = await request.json();
-    const formattedDate = new Date(date);  
+    const body = await request.json()
+    const { dayOfWeek, date, meals } = body;
+
+    if (!dayOfWeek ) {
+        return NextResponse.json({ error: 'Missing required fields: dayOfWeek' }, { status: 400 });
+    }
+
+    const formattedDate = date ? new Date(date) : null;
+    const formattedMeals = meals ? meals : null;
     const id = new mongoose.Types.ObjectId();
 
     await connectMongoDB();
-    await Day.create({ id, dayOfWeek, date: formattedDate, meals });
-    return NextResponse.json({message: "Day added successfully"}, {status: 201});
+    const day = await Day.create({ id, dayOfWeek, date: formattedDate, meals: formattedMeals });
+    return NextResponse.json(day, { status: 201 });
 }

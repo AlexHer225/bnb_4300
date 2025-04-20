@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 import Meal from "./mealSchema";
 
 interface DAy extends Document {
-    dayOfWeek?: string;
+    dayOfWeek: string;
     date?: Date;
     meals?: [{type: mongoose.Schema.Types.ObjectId, ref: 'Meal'}];
 }

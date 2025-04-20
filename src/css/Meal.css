@@ -1,16 +1,17 @@
 .meal-card {
+    position: relative; /* changed */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: #5D5D5D; /* Light background for contrast */
+    background: #5D5D5D;
     border-radius: 8px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 16px;
     max-width: 80%;
-    min-height: 90px; /* Adjust as needed */
+    min-height: 90px;
     max-height: 200px;
     height: auto;
     overflow: hidden;
@@ -21,12 +22,14 @@
 }
 
 .meal-image {
-    width: 80%;
+    width: 85%;
+    display: block;
+    transition: opacity 0.3s ease;
     height: auto;
     max-height: 150px; /* Adjust this based on how large you want the image */
     object-fit: cover; /* Ensures the image fits within its container while maintaining aspect ratio */
     border-radius: 8px;
-}
+  }
 
 .meal-title {
     font-family: 'Nunito Sans', sans-serif;
@@ -34,3 +37,60 @@
     color: #F5F1E3;
     margin: 0;
 }
+
+/* Buttons hidden by default */
+.meal-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    background-color: #5D5D5D;
+}
+
+.meal-buttons button {
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    padding: 5px;
+    max-width: 125px;    
+}
+
+/* On hover, hide image and show buttons */
+.meal-card:hover .meal-image {
+    opacity: 0;
+}
+
+/* On hover, hide title and show buttons */
+.meal-card:hover .meal-title {
+    opacity: 0;
+}
+
+.meal-card:hover .meal-buttons {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* .meal-add-button {
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    padding: 5px;
+    max-width: 125px;
+} */
