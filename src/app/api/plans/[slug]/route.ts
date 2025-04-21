@@ -5,12 +5,12 @@ import connectMongoDB from "../../../../../config/mongodb";
 import Plan from "../../../models/planSchema";
 
 interface RouteParams {
-    params: { id: string };
+    params: { slug: string };
 }
 
 
 export async function PUT(request:NextRequest, { params}:RouteParams ) {
-    const { id } = await params;
+    const { slug: id } = await params;
     const { days, user, name  } = await request.json();
     await connectMongoDB();
     await Plan.findByIdAndUpdate(id, { days, user, name });
@@ -18,14 +18,14 @@ export async function PUT(request:NextRequest, { params}:RouteParams ) {
   }
   
   export async function GET(request:NextRequest, { params }:RouteParams) {
-    const { id } = await params;
+    const { slug: userId } = await params;
     await connectMongoDB();
-    const plan = await Plan.findOne({_id: id});
+    const plan = await Plan.find({ user: userId });
     return NextResponse.json({plan}, { status: 200 });
   }
   
   export async function DELETE(request: NextRequest, { params }: RouteParams) {
-      const { id } = await params;
+      const { slug: id } = await params;
     
       if (!mongoose.Types.ObjectId.isValid(id)) {
         return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });

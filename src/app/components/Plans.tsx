@@ -15,6 +15,7 @@ interface PlansProps {
 interface PlanType {
     _id: string;
     days: string[];
+    name?: string;
   }
   
 
@@ -24,8 +25,9 @@ export default function Plans({plansProps}: PlansProps) {
     const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
     useEffect(() => {
-        setPlans([...plans, ...plansProps]);
-        // console.log('SET PLANS: ', [...plans, ...plansProps]);
+        // setPlans([...plans, ...plansProps]);
+        // setPlans(prev => [...prev, ...plansProps]);
+        setPlans(plansProps);
     }, [plansProps]);
 
     async function handleAddWeek () {

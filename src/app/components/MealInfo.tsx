@@ -7,11 +7,11 @@ import '../../css/mealInfo.css';
 
 interface Meal {
     id: string;
-    title: string;
-    image: string;
-    readyInMinutes: number;
-    sourceUrl: string;
-    cheap: boolean;
+    title?: string;
+    image?: string;
+    readyInMinutes?: number;
+    sourceUrl?: string;
+    cheap?: boolean;
     diets?: [string];
     summary?: string;
 }

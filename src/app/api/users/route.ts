@@ -12,10 +12,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const { username, passwordHashed, excludeCuisine, diet, intolerances, excludeIngredients } = await request.json();
+    const { name, username, password, excludeCuisine, diet, intolerances, excludeIngredients } = await request.json();
     const id = new mongoose.Types.ObjectId();
     await connectMongoDB();
-    const hash = await bcrypt.hash(passwordHashed, 5);
-    await User.create({ id, username, passwordHashed: hash, excludeCuisine, diet, intolerances, excludeIngredients });
+    const hashedPassword = await bcrypt.hash(password, 5);
+    await User.create({ name, id, username, passwordHashed: hashedPassword, excludeCuisine, diet, intolerances, excludeIngredients });
     return NextResponse.json({message: "User added successfully"}, {status: 201});
 }

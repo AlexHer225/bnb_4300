@@ -9,7 +9,7 @@ interface RouteParams {
 }
 
 
-export async function PUT(request:NextRequest, { params}:RouteParams ) {
+export async function PUT(request:NextRequest, { params }:RouteParams ) {
     const { id } = await params;
     const { dayOfWeek, date, meals } = await request.json();
     await connectMongoDB();

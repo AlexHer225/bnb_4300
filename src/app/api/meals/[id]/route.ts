@@ -19,6 +19,9 @@ export async function PUT(request:NextRequest, { params}:RouteParams ) {
   
   export async function GET(request:NextRequest, { params }:RouteParams) {
     const { id } = await params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid ID format for id: ", id }, { status: 400 });
+    }
     await connectMongoDB();
     const objectId = new mongoose.Types.ObjectId(id); 
     const meal = await Meal.findOne({_id: objectId});

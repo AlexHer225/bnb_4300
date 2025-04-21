@@ -13,7 +13,7 @@ interface input  {
 }
 
 interface newDetailProps{
-    onAddForm: (item: { title: string, image: string, _id: string }) => void;
+    onAddForm: (newMeal: string) => void;
     closeForm: () => void;
 }
 
@@ -44,7 +44,7 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
         });
 
         try{
-            console.log('CREATING MEAL: ', formArgs.search);
+            // console.log('CREATING MEAL: ', formArgs.search);
             const response = await fetch('/api/meals', {
                 method: 'POST',
                 headers: {
@@ -57,7 +57,7 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
             }
             const newMeal = await response.json();
 
-            onAddForm({ title: newMeal.title, image: newMeal.image, _id: newMeal._id });
+            onAddForm(newMeal);
             closeForm();
 
             // Clear the form
