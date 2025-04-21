@@ -22,17 +22,31 @@ type Day = {
 interface PlanType {
   _id: string;
   days: string[];
+  name?: string;
 }
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user;
-  console.log('IS LOGGED IN: ', isLoggedIn);
-  const [meals, setMeals] = useState<Meal[]>([]);
-  const [plans, setPlans] = useState<any[]>([]);
+  // const [meals, setMeals] = useState<Meal[]>([]);
+  // const [plans, setPlans] = useState<any[]>([]);
   const [newPlan, setNewPlan] = useState<any | null>(null);
   const [dbPlans, setDBPlans] = useState<PlanType[]>([]);
+  const [savedPlans, setSavedPlans] = useState<PlanType[]>([]);
+
   
+  useEffect(() => {
+    const getSavedPlans = async () => {
+      const response = await fetch(`/api/plans/${session?.user?.id}`); // get plans by user ID 
+      const plans = await response.json();
+      if (plans.length > 0) {
+        setSavedPlans(plans);
+      }
+    };
+    if (session?.user?.id) {
+        getSavedPlans();
+    }
+}, [session]);
 
   // Generates days based on meals
   const generateDays = async () => {
@@ -77,7 +91,7 @@ export default function Dashboard() {
       });
       const mealsWrapped = await mealsResponse.json();
       const meals: Meal[] = mealsWrapped.meals;
-      // console.log('MEALS: ', meals);
+      // console.log('DASHBOARD MEALS: ', meals);
       const mealIds = meals.map(meal => meal._id);
 
       const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -105,9 +119,10 @@ export default function Dashboard() {
       });
       const defaultPlan = await planResponse.json();
 
-      const plansProps: PlanType = { _id: defaultPlan, days: days };
+      const plansProps: PlanType = { _id: defaultPlan, days: days, name: 'Demo Plan' };
       // console.log('SETTING PLANS PROPS: ', plansProps);
       // setDBPlans(prev => [...prev, plansProps]);
+      // console.log('SETTING DB PLANS: ', [plansProps]);
       setDBPlans([plansProps]);
     };
     createDefaultPlan().catch(console.error);
@@ -132,16 +147,16 @@ export default function Dashboard() {
   //   fetchMeals();
   // }, []);
 
-  const savedPlans = meals.length ? [
-    {
-      _id: 'plan-1',
-      days: generateDays(),
-    },
-    {
-      _id: 'plan-2',
-      days: generateDays(),
-    }
-  ] : [];
+  // const savedPlans = meals.length ? [
+  //   {
+  //     _id: 'plan-1',
+  //     days: generateDays(),
+  //   },
+  //   {
+  //     _id: 'plan-2',
+  //     days: generateDays(),
+  //   }
+  // ] : [];
 
   const handleTogglePlan = () => {
     if (newPlan) {
@@ -170,22 +185,24 @@ export default function Dashboard() {
         {isLoggedIn ? (
           <>
             <h2 className='header-dashboard'>Your Meal Plans</h2>
-            {savedPlans.map((plan, index) => (
-              <Plans key={index} plansProps={[plan]} />))}
+            {/* {savedPlans.map((plan, index) => (
+              <Plans key={index} plansProps={[plan]} />))} */}
+            <Plans plansProps={savedPlans} />
           </>
         ) : (
           <>
             <h2 className='header-dashboard'>Welcome to Hangry!</h2>
             <p className='dashboard-login-description'>Please log in to save your meal plans.</p>
               <div className='new-plan-container'>
-                <button onClick={handleTogglePlan} className='new-plan-button'>
+                <Plans plansProps={dbPlans} />
+                {/* <button onClick={handleTogglePlan} className='new-plan-button'>
                   {newPlan ? 'Remove Meal Plan -' : 'Create 7 Day Meal Plan +'}
-                </button>
+                </button> */}
               </div>
               <div className='plan-container'>
-              {isLoggedIn && (
+              {/* {isLoggedIn && (
                 <Plans plansProps={[newPlan]} />
-              )} 
+              )}  */}
               </div>
           </>
         )}

@@ -58,7 +58,8 @@ const Navbar = () => {
                     <>
                         {showUser && 
                             <Link className="namebutton" href="/user-info">
-                                {name}
+                                {name || 'User'}
+                                {/* if no name, User? */}
                             </Link>
                         }   
                         <button onClick={handleLogout} className="logbutton">

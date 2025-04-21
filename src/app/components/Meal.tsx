@@ -14,16 +14,20 @@ interface MealProps {
   cheap?: boolean;
   diets?: [string];
   summary?: string;
+  dayId?: string;
+  onDelete: (mealId: string) => void;
 }
 
-const Meal: React.FC<MealProps> = ({ id }) => {
+function Meal ({id, dayId, onDelete}: MealProps) {
+// const Meal: React.FC<MealProps> = ({ id }) => {
   const [meal, setMeal] = useState<MealProps | null>();
   const [showDetails, setShowDetails] = useState(false);
+  // console.log('meal item created id: ', id);
 
   useEffect(() => {
-    (async () => {
+    const getMeal = async () => {      
       try {
-        console.log('ATTEMPTING TO GET MEAL: ', id);
+        // console.log('ATTEMPTING TO GET MEAL: ', id);
         const res = await fetch(`/api/meals/${id}`);
         const data = await res.json();
         const meal = data.meal;
@@ -31,8 +35,33 @@ const Meal: React.FC<MealProps> = ({ id }) => {
       } catch (err) {
         console.error('Error fetching meal:', err);
       }
-    })();
+    };
+    if (id) {
+      getMeal();
+    } else {
+      // console.log('DID NOT GET MEAL BECAUSE ID: ', id);
+    }
   }, [id]);
+
+  useEffect(() => {
+    const getNewMeal = async () => {
+      try {
+        // console.log('attempting to get NEW MEAL: ', id);
+        const res = await fetch(`/api/meals/${id}`);
+        const data = await res.json();
+        const meal = data.meal;
+        setMeal(meal);
+      } catch (err) {
+        console.error('Error fetching meal:', err);
+      }
+    };
+    if (id) {
+      getNewMeal();
+    } else {
+      console.log('DID NOT GET NEW MEAL BECAUSE ID: ', id);
+    }
+  }, []);
+
 
   function buttonHandler() {
     console.log('button clicked');
@@ -47,15 +76,7 @@ const Meal: React.FC<MealProps> = ({ id }) => {
   }
 
   async function deleteButtonHandler() {
-    try {
-      const response = await fetch(`api/days/`, {
-        method: 'PUT',
-      });
-      if (!response.ok) throw new Error('Failed to delete meal');
-      setMeal(null);
-    } catch (error) {
-      console.error('Error deleting meal:', error);
-    } 
+    onDelete(id);
   }
 
   if (!meal) return (

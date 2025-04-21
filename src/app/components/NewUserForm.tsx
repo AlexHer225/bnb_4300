@@ -49,7 +49,7 @@ const NewUser = () => {
                 excludeIngredients: formArgs.excludeIngredients,
             }
         
-            const response = await fetch('/api/user', {
+            const response = await fetch('/api/users', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const NewUser = () => {
                 excludeIngredients:'',
             });
 
-            router.push('../../src/app/page')
+            router.push('/signup-landing');
         }
         catch(error){
             console.error('Error creating item');
@@ -152,7 +152,6 @@ const NewUser = () => {
                 value={formArgs.excludeIngredients}
                 onChange={handleChange}
                 placeholder="Exclude Ingredients"
-                required
                 className="user"
             />
 
@@ -162,7 +161,6 @@ const NewUser = () => {
                 value={formArgs.excludeCuisine}
                 onChange={handleChange}
                 placeholder="Exclude Cuisine"
-                required
                 className="user"
             />
             <input
@@ -170,8 +168,7 @@ const NewUser = () => {
                 type="string"
                 value={formArgs.diet}
                 onChange={handleChange}
-                placeholder="Enter Dietary Specifics"
-                required
+                placeholder="Enter Diets (vegan, vegetarian, etc.)"
                 className="user"
             />
             <input

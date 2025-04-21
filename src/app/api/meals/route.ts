@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     if (url.searchParams)
         size = url.searchParams.get('size');
     var meals = null;
-    if (size && !isNaN(size)) {
+    if (size && !isNaN(Number(size))) {
         meals = await Meal.aggregate([{ $sample: { size: Number(size) }}]);
     } else {
         meals = await Meal.find();

@@ -1,0 +1,26 @@
+.signup-landing-page {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 40px 20px;
+    background-color: #94A864;
+    text-align: center;
+    color: #F5F1E3;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .signup-landing-page h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .signup-landing-page h2 {
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #94A864;
+  }
