@@ -58,6 +58,7 @@ body{
     margin: 0%;
     margin-bottom: 2rem;
     flex-wrap: wrap;
+    
 }
 
 .plans-title{
@@ -106,6 +107,7 @@ body{
     gap: 20px;
     height: 100%;
     margin: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     
 }
 
