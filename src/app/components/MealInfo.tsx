@@ -34,23 +34,27 @@ function MealInfo({ meal, onClose }: MealInfoProps ) {
                     <div className="meal-info-item">
                         <dt><strong>Ready in:</strong></dt>
                         <dd>{meal.readyInMinutes} minutes</dd>
+                        <br></br>
                     </div>
                     
                     <div className="meal-info-item">
-                        <dt><strong>Budget Friendly?</strong></dt>
+                        <dt><strong>Budget Friendly?:</strong></dt>
                         <dd>{meal.cheap ? 'Yes' : 'No'}</dd>
+                        <br></br>
                     </div>
                     
                     {meal.diets?.length > 0 && (
                         <div className="meal-info-item">
                         <dt><strong>Diets:</strong></dt>
                         <dd>{meal.diets.join(', ')}</dd>
+                        <br></br>
                         </div>
+                        
                     )}
                     
                     <div className="meal-info-item">
                         <dt><strong>Summary:</strong></dt>
-                        <dd dangerouslySetInnerHTML={{ __html: meal.summary || '' }}></dd>
+                        <p dangerouslySetInnerHTML={{ __html: meal.summary || '' }}></p>
                     </div>
                     
                     <a href={meal.sourceUrl} target="_blank" rel="noopener noreferrer" className="meal-link">
@@ -59,7 +63,8 @@ function MealInfo({ meal, onClose }: MealInfoProps ) {
                     </dl>
                 </div>
             </div>
-            <h2>MEAL INFO</h2>
+            
+            <h2></h2>
         </>
     );
 }

@@ -158,8 +158,9 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
                 className="meal"
             />
             <div className='checkbox-area'>
-                <label htmlFor="cheap" style={{ marginLeft: '60px' }}>
-                    Budget Friendly?
+                <label htmlFor="cheap" style={{ marginLeft: '0px' }}>
+                    Budget<br></br>Friendly?
+                    <br></br>
                 </label>
                 <input
                     id = "cheap"

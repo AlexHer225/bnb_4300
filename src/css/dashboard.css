@@ -1,6 +1,7 @@
 body{
     background-color: #94A864;
     margin-top: 100px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-container {
@@ -54,8 +55,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 4%;
+    margin: 0%;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
+    
 }
 
 .plans-title{
@@ -66,7 +69,7 @@ body{
 }
 
 .plans-carousel{
-    margin-bottom: 2rem;
+   
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -78,6 +81,8 @@ body{
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 20px;
+  
 }
 
 
@@ -86,7 +91,7 @@ body{
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 300px;
     min-width: 200px;
@@ -102,6 +107,8 @@ body{
     gap: 20px;
     height: 100%;
     margin: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
 }
 
 .card-content {
@@ -113,6 +120,7 @@ body{
     gap: 16px;
     height: 100%;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .card h1{
@@ -128,14 +136,15 @@ body{
     flex-direction: row;
     margin-left: 20px;
     margin-right: 20px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: visible;
+    overflow-y: visible;
     height: auto;
     min-height: auto;
     gap: 0;
 }
 
 .meal-plan-button {
+    
     background-color: #5D5D5D;
     color: #F5F1E3;
     font-family: 'Nunito Sans', sans-serif;

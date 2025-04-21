@@ -9,6 +9,7 @@
   font-family: Arial, sans-serif;
   top:0;
   z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .text{
@@ -39,7 +40,9 @@
     background-color: #94A864;
     border-radius: 9px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
+
 .signbutton{
     display: flex;
     padding: 0.3rem 0.9rem;
@@ -48,6 +51,7 @@
     align-items: center;
     margin-left: 0;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 .namebutton{
     display: flex;
@@ -57,17 +61,19 @@
     align-items: center;
     margin-left: 0;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .logbutton:hover{
     background-color: #324732;
-    transform: translateY(-2px)
+    transform: translateY(-2px);
 }
 .signbutton:hover{
     background-color: #324732;
-    transform: translateY(-2px)
+    transform: translateY(-2px);
 }
 .namebutton:hover{
     background-color: #324732;
-    transform: translateY(-2px)
+    transform: translateY(-2px);
+    
 }

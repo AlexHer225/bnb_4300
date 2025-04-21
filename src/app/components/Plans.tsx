@@ -65,6 +65,7 @@ export default function Plans({plansProps}: PlansProps) {
                 {plans.map((plan: PlanType, index: number) => (
                     <Plan key={index} planData={plan} selectedDayId={selectedDayId} setSelectedDayId={setSelectedDayId} />
                 ))}
+                <br></br>
             </div>
             <div className="meal-plan-button">   
                 <Button onClick={handleAddWeek} text="Add Week"/>
