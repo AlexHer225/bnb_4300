@@ -92,3 +92,13 @@ body{
     transform: translateY(-2px);
     transition: all 0.3s ease-in-out;
 }
+
+.error-message {
+  color: #F5F1E3;
+  text-decoration: none;
+  display: block;
+  margin-top : 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
