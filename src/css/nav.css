@@ -32,6 +32,8 @@
     justify-content: flex-start;
     gap: 1rem;
     margin-left: auto;
+    max-width: 40%;
+    flex-wrap: wrap;
 }
 .logbutton{
     display: flex;

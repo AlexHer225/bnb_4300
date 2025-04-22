@@ -19,6 +19,16 @@
     font-weight: normal;
   }
 
+  .signup-landing-page a{
+    text-decoration: underline;
+  }
+
+  .signup-landing-page a:hover{
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+  }
+
   body {
     margin: 0;
     padding: 0;
