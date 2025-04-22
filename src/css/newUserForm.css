@@ -12,6 +12,7 @@ body{
       align-items: center;
       height: 100vh;
       margin-top: 30vh;
+
     }
     
     img {
@@ -95,6 +96,8 @@ body{
     flex-shrink: 0;
     text-align: right;
     margin-right: 1rem;
+    margin-bottom: 15px;
+
   }
   
   .label input {
