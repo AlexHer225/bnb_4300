@@ -1,9 +1,4 @@
-@media(max-width:414px) and (orientation: portrait){
-  body{
-      max-width: 414px;
-  }
 
-}
 body{
     height: 100%;
     margin: 0;
