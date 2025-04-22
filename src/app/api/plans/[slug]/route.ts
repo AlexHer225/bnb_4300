@@ -17,12 +17,22 @@ export async function PUT(request:NextRequest, { params}:RouteParams ) {
     return NextResponse.json({ message: "Plan updated" }, { status: 200 });
   }
   
-  export async function GET(request:NextRequest, { params }:RouteParams) {
-    const { slug: userId } = await params;
+  // export async function GET(request:NextRequest, { params }:RouteParams) {
+  //   const { slug: userId } = await params;
+  //   await connectMongoDB();
+  //   const plan = await Plan.find({ user: userId });
+  //   // console.log('RETURNING PLAN: ', plan);
+  //   return NextResponse.json(plan, { status: 200 });
+  // }
+
+ export async function GET(request:NextRequest, { params }:RouteParams) {
+    const { slug: id } = await params;
     await connectMongoDB();
-    const plan = await Plan.find({ user: userId });
-    return NextResponse.json({plan}, { status: 200 });
-  }
+    const plan = await Plan.find({ _id: id });
+    // console.log('RETURNING PLAN: ', plan);
+    return NextResponse.json(plan, { status: 200 });
+}
+  
   
   export async function DELETE(request: NextRequest, { params }: RouteParams) {
       const { slug: id } = await params;
