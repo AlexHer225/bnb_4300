@@ -312,10 +312,37 @@ body{
     color: black;
   }
 
-.plan-flex-container-parent{
+  .delete-plan-button {
+    background-color: #800000;
+    color: #F5F1E3;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer; 
+    align-self: center;
+    padding: 5px;
+    max-width: 125px;
+  }
+
+.delete-plan-button:hover {
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+ }
+
+.plan-flex-container-parent {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
+}
+
+.plan-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }

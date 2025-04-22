@@ -39,6 +39,12 @@ interface PlanProps {
       })
     };
 
+    const deletePlan = async () => {
+      await fetch(`api/plans/${planData._id}`, {
+        method: 'DELETE'
+      })
+    }
+
     if (!planData.days) return <h2>Error, no Plan</h2>;
     return (
       <div className="plan-flex-container-parent">
@@ -46,10 +52,13 @@ interface PlanProps {
           {planData.days.map((day) => (
             <DayComponent key={day} id={day} />
           ))}
-          </div>
-        {session?.user && isSaved == false &&
-          (<button className="save-plan-button" onClick={savePlan}>Save Plan</button>)}
-        
+        </div>
+        <div className = "plan-buttons-container">
+          {session?.user && isSaved == false &&
+            (<button className="save-plan-button" onClick={savePlan}>Save Plan</button>)}
+          {session?.user &&  
+            (<button className="delete-plan-button" onClick={deletePlan}>Delete Plan</button>)}
+        </div>
       </div>
     );
   }

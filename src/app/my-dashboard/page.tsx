@@ -43,15 +43,15 @@ export default function MyDashboard() {
     }
   }, [session]);
 
-  useEffect(() => {
+  //useEffect(() => {
     // Create a new plan with meals. This is just for demo purposes.
     // In a real application, you would probably want to create a plan based on user input.
     // This function will be called when the component mounts.
-    const createInitialPlan = async () => {
+    /*const createInitialPlan = async () => {
       const plan = await createNewPlan('Demo Plan');
     };
     createInitialPlan().catch(console.error);
-  }, []);
+  }, []);*/
 
   const createNewPlan = async (name: string) => {
     const mealsResponse = await fetch(`api/meals?size=7`, {
@@ -100,7 +100,6 @@ export default function MyDashboard() {
         ) : (
           <h2>Looks like you have no saved plans. Create one today!</h2>
         )}
-        <h2 className='header-dashboard'>Workspace</h2>
         <Plans plansProps={dbPlans} />
         <button className='new-plan-button' onClick={() => createNewPlan('New Plan')}>Create New Plan</button>
       </div>
