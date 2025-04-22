@@ -101,6 +101,8 @@ const NewUser = () => {
         width={400}
         height={400}
         />
+        <div className="label">
+            <label htmlFor="firstName">First Name </label>
             <input
                 name = "firstName"
                 type="string"
@@ -110,6 +112,9 @@ const NewUser = () => {
                 required
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="lastName">Last Name </label>
             <input
                 name = "lastName"
                 type="string"
@@ -119,7 +124,10 @@ const NewUser = () => {
                 required
                 className="user"
             />
-            <input
+        </div>
+        <div className="label">
+            <label htmlFor="userName">Username </label>
+            <input  
                 name = "userName"
                 type="string"
                 value={formArgs.userName}
@@ -128,24 +136,33 @@ const NewUser = () => {
                 required
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="password">Password </label>
             <input
                 name = "password"
-                type="string"
+                type="password"
                 value={formArgs.password}
                 onChange={handleChange}
                 placeholder="Enter Password"
                 required
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
                 name = "confirmPassword"
-                type="string"
+                type="password"
                 value={formArgs.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 required
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="excludeIngredients">Exclude Ingredients </label>
             <input
                 name = "excludeIngredients"
                 type="string"
@@ -154,8 +171,10 @@ const NewUser = () => {
                 placeholder="Exclude Ingredients"
                 className="user"
             />
-
-        <input
+        </div>
+        <div className="label">
+            <label htmlFor="excludeCuisine">Exclude Cuisine </label>
+            <input
                 name = "excludeCuisine"
                 type="string"
                 value={formArgs.excludeCuisine}
@@ -163,6 +182,9 @@ const NewUser = () => {
                 placeholder="Exclude Cuisine"
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="diet">Diet </label>
             <input
                 name = "diet"
                 type="string"
@@ -171,6 +193,9 @@ const NewUser = () => {
                 placeholder="Enter Diets (vegan, vegetarian, etc.)"
                 className="user"
             />
+        </div>
+        <div className="label">
+            <label htmlFor="intolerances">Intolerances </label>
             <input
                 name = "intolerances"
                 type="string"
@@ -179,6 +204,7 @@ const NewUser = () => {
                 placeholder="Enter Food Intolerances"
                 className="user"
             />
+        </div>
 
             <button type='submit' className='submit-form-button'>
             Submit
