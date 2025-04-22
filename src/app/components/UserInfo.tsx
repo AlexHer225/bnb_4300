@@ -48,17 +48,17 @@ function UserInfo( {_id}: UserProps ) {
                         <dd>{user.excludeCuisine}</dd>
                     </div>
                                         
-                    <div className="meal-info-item">
+                    <div className="user-info-item">
                         <dt>Diets:</dt>
                         <dd>{user.diet}</dd>
                     </div>
 
-                    <div className="meal-info-item">
+                    <div className="user-info-item">
                         <dt>Intolerances:</dt>
                         <dd>{user.intolerances}</dd>
                     </div>
 
-                    <div className="meal-info-item">
+                    <div className="user-info-item">
                         <dt>Avoided Ingredients:</dt>
                         <dd>{user.excludeIngredients}</dd>
                     </div>
