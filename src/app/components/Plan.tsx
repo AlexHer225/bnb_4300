@@ -41,12 +41,15 @@ interface PlanProps {
 
     if (!planData.days) return <h2>Error, no Plan</h2>;
     return (
-      <div className="plan-flex-container">
-        {planData.days.map((day) => (
+      <div className="plan-flex-container-parent">
+        <div className="plan-flex-container">
+          {planData.days.map((day) => (
             <DayComponent key={day} id={day} />
-        ))}
+          ))}
+          </div>
         {session?.user && isSaved == false &&
-          (<button onClick={savePlan}>Save Plan</button>)}
+          (<button className="save-plan-button" onClick={savePlan}>Save Plan</button>)}
+        
       </div>
     );
   }

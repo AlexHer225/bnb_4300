@@ -75,7 +75,7 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             />
             <input
                 name = "password"
-                type="string"
+                type="password"
                 value={formArgs.password}
                 onChange={handleChange}
                 placeholder="Enter Password"

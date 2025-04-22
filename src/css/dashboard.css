@@ -292,3 +292,30 @@ body{
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .save-plan-button {
+    background-color: #5D5D5D;
+    color: #F5F1E3;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer; 
+    align-self: center;
+    padding: 5px;
+    max-width: 125px;
+  }
+
+  .save-plan-button:hover{
+    background-color: darkgray;
+    transition: 0.3s;
+    color: black;
+  }
+
+.plan-flex-container-parent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
