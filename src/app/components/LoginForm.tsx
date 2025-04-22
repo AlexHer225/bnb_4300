@@ -36,7 +36,7 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             if (response?.error) {
                 throw new Error('Network response was not ok');
             } else {
-                window.location.href = "/dashboard";
+                window.location.href = "/my-dashboard";
             }
         } catch (e: any) {
             console.error(e);

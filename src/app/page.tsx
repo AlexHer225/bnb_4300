@@ -41,9 +41,9 @@ export default function Home() {
         <h1>Use Hangry Yourself</h1>
         <button
           onClick={() => {
-            window.location.href = "/dashboard";
+            {isLoggedIn ? window.location.href = "/my-dashboard" : window.location.href = "/dashboard";}
           }}
-        >Try It Now</button>
+        >{isLoggedIn ? "Go to Dashboard" : "Try it now" }</button>
       </div>
 
       <div className="bottom-div-splash">

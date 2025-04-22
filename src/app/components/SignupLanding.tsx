@@ -9,4 +9,4 @@ export default function SignupLanding () {
             <h2>Now please log into your new account</h2>
         </div>
     )
-}
+} 

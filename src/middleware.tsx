@@ -9,7 +9,7 @@ const middleware = async (request: NextRequest) => {
     const session = await auth();
     const isAuthenticated = !!session?.user;
 
-    const publicPaths = ["/", "/dashboard", "/signup", "/login"];
+    const publicPaths = ["/", "/signup", "/login"];
 
     if (!isAuthenticated && !publicPaths.includes(pathname)) {
 
@@ -22,7 +22,7 @@ const middleware = async (request: NextRequest) => {
 
 export const config = {
   matcher: [
-    "/dashboard",
+    "/my-dashboard",
     "/login",
     "/signup",
     // "/create-item/:path*",
