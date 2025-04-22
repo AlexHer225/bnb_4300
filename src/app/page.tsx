@@ -1,8 +1,6 @@
 'use client';
 import { useSession } from "next-auth/react";
 import "../css/splash.css";
-import Navbar from './components/Navbar';    
-// import { auth } from "../auth";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -10,7 +8,6 @@ export default function Home() {
 
   return (
     <div className="splash-container">
-      {/* <Navbar session={session}/> */}
      <div className="top-div-splash">
       <h1>ARE YOU</h1>
       <>

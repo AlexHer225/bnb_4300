@@ -22,10 +22,7 @@ interface MealProps {
 }
 
 export default function DayComponent({id}: DayComponentProps) {
-// const DayComponent: React.FC<DayComponentProps> = ({ id }) => {
-// function DayComponent({ day, selectedDay }: DayComponentProps) {
   const [day, setDay] = useState<DayComponentProps | null>(null);
-  // const [meals, setMeals] = useState<string[]>(day?.meals);
   const [isAddButton, setIsAddButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [mealUpdateTrigger, setMealUpdateTrigger] = useState(false); // 🆕
@@ -40,16 +37,6 @@ export default function DayComponent({id}: DayComponentProps) {
         const tempDay = data.day;
         // console.log('SETTING DAY: ', tempDay);
         setDay(tempDay);
-        // if (tempDay.meals) {
-        //   // console.log('SETTING MEALS: ', tempDay.meals);
-        //   setMeals(tempDay.meals);
-        // }
-        // if (tempDay.meals) {
-        //   // console.log('tempDay meals:', tempDay.meals);
-        //   tempDay.meals.forEach((meal) => {
-        //     // console.log('mapped meal:', meal);
-        //   });
-        // }
       } catch (err) {
         console.error('Error fetching day:', err);
       }
@@ -57,7 +44,7 @@ export default function DayComponent({id}: DayComponentProps) {
     getDay();
   }, [id]);
 
-  // 🔁 Fetch day data when id or mealUpdateTrigger changes
+  // Fetch day data when id or mealUpdateTrigger changes
   useEffect(() => {
     const getDay = async () => {
       try {
@@ -129,11 +116,12 @@ export default function DayComponent({id}: DayComponentProps) {
       const wrappedMeal = await response.json(); 
       const randomMeal = wrappedMeal.meals[0]._id;
       // console.log('QUICK ADD RANDOM: ', randomMeal);
-      handleAddMeal(randomMeal);
+      if (!day?.meals?.includes(randomMeal)) {
+        handleAddMeal(randomMeal); // no duplicate meals
+      } else {
+        console.log('DID NOT QUICK ADD MEAL: ', day?.meals, ' = existing meal ', randomMeal);
+      }
     } 
-    // else {
-    //   handleDeleteMeal();
-    // }
   }
   
   if (!day) return;
@@ -149,12 +137,6 @@ export default function DayComponent({id}: DayComponentProps) {
             ))}
           </ul>
           )}
-      {/*         
-        <ul>
-          {day.meals?.map((meal) => (
-            <Meal key={meal._id} id={meal._id} />
-          ))}
-        </ul> */}
         <div className="add-meal-form">    
           {showForm && (
             <div

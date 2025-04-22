@@ -44,11 +44,14 @@ export async function POST(request: NextRequest) {
     const response = await fetch(spoonacularUrl);
     const data = await response.json();
     const newMeal = await data.results[0];
-    
-    const { title, image, readyInMinutes, sourceUrl, cheap, diets, summary } = newMeal;
 
-    await connectMongoDB();
+    if (newMeal) {
+        const { id, title, image, readyInMinutes, sourceUrl, cheap, diets, summary } = newMeal
+        await connectMongoDB();
 
-    const meal = await Meal.create({ id, title, image, readyInMinutes, sourceUrl, cheap, diets, summary });
-    return NextResponse.json(meal, {status: 201});
+        const meal = await Meal.create({ id, title, image, readyInMinutes, sourceUrl, cheap, diets, summary });
+        return NextResponse.json(meal, {status: 201});    
+    } else {
+        return new NextResponse(null, { status: 204 });
+    }
 }

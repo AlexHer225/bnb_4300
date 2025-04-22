@@ -17,8 +17,6 @@ export async function POST(request: NextRequest) {
 
     const _id = new mongoose.Types.ObjectId();
 
-    // console.log('POSTING PLAN DAY IDS = ', days);
-
     let dayIds: mongoose.Types.ObjectId[] = [];
     if (Array.isArray(days)) {
         dayIds = days
@@ -35,13 +33,4 @@ export async function POST(request: NextRequest) {
 
     const plan = await Plan.create(planData);
     return NextResponse.json(plan.id, { status: 201 });
-
-    // const { days, user, name } = await request.json();
-    // const _id = new mongoose.Types.ObjectId();
-    // console.log('POSTING PLAN DAY IDS = ', days);
-    // const dayIds = days.map((day: string) => new mongoose.Types.ObjectId(day));
-
-    // await connectMongoDB();
-    // await Plan.create({ _id, days: dayIds, user, name });
-    // return NextResponse.json({message: "Plan added successfully"}, {status: 201});
 }

@@ -1,6 +1,5 @@
 'use client';
 import { FormEvent, useState } from 'react';
-import connectMongoDB from "../../../config/mongodb";
 import { useRouter } from 'next/navigation';
 import '../../css/loginForm.css';
 import { doCredentialLogin, doLogout } from '../actions/index';
@@ -17,10 +16,11 @@ interface loginDetailProps{
 }
 
 export default function LoginForm({ onAddForm }:loginDetailProps) {
-    const[formArgs, setFormArgs ] = useState({
+    const [ formArgs, setFormArgs ] = useState({
         userName: '',
         password: '',
     });
+    const [ isError, setIsError ] = useState(false);
 
     const router = useRouter();
     async function handleSubmit (event: FormEvent<HTMLFormElement>): Promise<void> {
@@ -39,7 +39,8 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
                 window.location.href = "/my-dashboard";
             }
         } catch (e: any) {
-            console.error(e);
+            setIsError(true);
+            // console.error(e);
         }
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -87,8 +88,9 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             <button type='submit' className='submit-form-button'>
             Login
             </button>
-
-            
+            {isError && (
+                <h3 className='error-message'>Username or Login is incorrect</h3>
+            )}            
         </form>
         </div>
         </div>

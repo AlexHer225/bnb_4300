@@ -18,6 +18,8 @@ interface newDetailProps{
 }
 
 export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
+    const [isErrored, setIsErrored] = useState(false);
+
     const[formArgs, setFormArgs ] = useState({
         search: '',
         cuisine: '',
@@ -53,12 +55,16 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
                 body: JSON.stringify(formArgs),
             });
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                setIsErrored(true);
+                // throw new Error('Network response was not ok');
             }
             const newMeal = await response.json();
-
-            onAddForm(newMeal);
-            closeForm();
+            if (!newMeal) {
+                setIsErrored(true);
+            } else {
+                onAddForm(newMeal);
+                closeForm();    
+            }
 
             // Clear the form
             setFormArgs({
@@ -72,7 +78,8 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
                 maxPrice: 20,
             });
         } catch (error) {
-            console.error('Error creating meal');
+            // console.error('Error creating meal');
+
         }
     } 
     
@@ -206,6 +213,10 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
         <button type='submit' className='submit-form-button'>
         Create Meal
         </button>
+
+        {isErrored && (
+            <h2 className='error-message'>No meals ound with these specifications</h2>
+        )}
 
             
         </form>
