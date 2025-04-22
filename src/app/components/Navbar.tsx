@@ -46,6 +46,7 @@ const Navbar = () => {
 
     return (
         <nav className="topbar">
+            
             <div className="text">
                 <h1>
                     <Link className="homebutton" href="/">Hangry</Link>
