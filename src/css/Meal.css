@@ -68,6 +68,7 @@
     max-width: 125px;    
 }
 
+
 /* On hover, hide image and show buttons */
 .meal-card:hover .meal-image {
     opacity: 0;

@@ -1,3 +1,4 @@
+
 body{
     background-color: #94A864;
     margin-top: 100px;
@@ -345,4 +346,39 @@ body{
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+@media(max-width:600px) and (orientation: portrait){
+    body{
+        max-width: 600px;
+    }
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        
+       
+    }
+    
+    .plans-carousel{
+        display:flex;
+        flex-direction: column;
+        justify-content: start;
+        justify-content: start;
+    }
+    .plan-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .plan-flex-container{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+    }
+    .card{
+        width: 400px;
+    }
+
 }
