@@ -51,13 +51,14 @@ export default function Dashboard() {
     createInitialPlan().catch(console.error);
   }, []);
 
+
   return (
     <div>
       <div className="dashboard-container">
         <h2 className='header-dashboard'>Welcome to Hangry!</h2>
         <p className='dashboard-login-description'>Please log in to save your meal plans.</p>
         <div className='demo-plan-container'>
-          <Plans plansProps={dbPlans} />
+          <Plans plansProps={dbPlans}/>
         </div>
       </div>
     </div>

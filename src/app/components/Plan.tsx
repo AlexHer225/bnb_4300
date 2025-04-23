@@ -8,12 +8,12 @@ interface PlanProps {
       _id: string;
       days: string[];
   };
-  selectedDayId: string | null;
-  setSelectedDayId: (id: string | null) => void;
+
+  onDelete?: (deletedId: string) => void;
+  onSave?: (savedId: string) => void;
 }
   
-  function Plan({ planData, selectedDayId, setSelectedDayId }: PlanProps) {
-    const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  function Plan({ planData, onDelete, onSave }: PlanProps) {
     const [isSaved, setIsSaved] = useState<boolean>(true);
 
     const { data: session, status } = useSession();
@@ -29,21 +29,19 @@ interface PlanProps {
       getPlan();
     }, []);
 
-    const savePlan = async () => {
-      // console.log('updating plan to have user: ', session?.user?.id);
-      await fetch(`api/plans/${planData._id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          user: session?.user?.id
-        })
-      })
-    };
-
-    const deletePlan = async () => {
-      await fetch(`api/plans/${planData._id}`, {
-        method: 'DELETE'
-      })
+    async function savePlanHandler() {
+      if (onSave) {
+        console.log("saved");
+        onSave(planData._id);
+      }
     }
+
+    async function deletePlanHandler() {
+      if (onDelete) {
+        console.log("deleted");
+        onDelete(planData._id);
+      } 
+    } 
 
     if (!planData.days) return <h2>Error, no Plan</h2>;
     return (
@@ -55,9 +53,9 @@ interface PlanProps {
         </div>
         <div className = "plan-buttons-container">
           {session?.user && isSaved == false &&
-            (<button className="save-plan-button" onClick={savePlan}>Save Plan</button>)}
+            (<button className="save-plan-button" onClick={savePlanHandler}>Save Plan</button>)}
           {session?.user &&  
-            (<button className="delete-plan-button" onClick={deletePlan}>Delete Plan</button>)}
+            (<button className="delete-plan-button" onClick={deletePlanHandler}>Delete Plan</button>)}
         </div>
       </div>
     );
