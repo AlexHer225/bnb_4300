@@ -1,7 +1,17 @@
-body{
-    background-color: white;
-}
-
-h2{
-    color: black;
-}
+.text {
+    text-align: center;
+    margin-top: 10vh;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  

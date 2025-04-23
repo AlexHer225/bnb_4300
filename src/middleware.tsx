@@ -12,12 +12,16 @@ const middleware = async (request: NextRequest) => {
     const publicPaths = ["/", "/signup", "/login"];
 
     if (!isAuthenticated && !publicPaths.includes(pathname)) {
-
         return NextResponse.redirect(new URL("/", request.url));
     }
 
-    return NextResponse.next();
+  // If the requested path is unknown (not matching an existing route), redirect to /not-found
+  const isValidPath = pathname !== "/not-found"; // Avoid redirecting to /not-found recursively
+    if (!isValidPath) {
+      return NextResponse.redirect(new URL("/not-found", request.url));
+    }
 
+    return NextResponse.next();
 };
 
 export const config = {
