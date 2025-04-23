@@ -13,7 +13,7 @@ const middleware = async (request: NextRequest) => {
 
     if (!isAuthenticated && !publicPaths.includes(pathname)) {
 
-        return NextResponse.redirect(new URL("/", request.url));
+        return NextResponse.redirect(new URL("/not-found", request.url));
     }
 
     return NextResponse.next();
