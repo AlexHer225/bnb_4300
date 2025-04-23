@@ -21,9 +21,8 @@ interface MealProps {
 
 export default function DayComponent({id}: DayComponentProps) {
   const [day, setDay] = useState<DayComponentProps | null>(null);
-  const [isAddButton, setIsAddButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [mealUpdateTrigger, setMealUpdateTrigger] = useState(false); // 🆕
+  const [mealUpdateTrigger, setMealUpdateTrigger] = useState(false);
 
   useEffect(() => {
     const getDay = async () => {
@@ -76,7 +75,6 @@ export default function DayComponent({id}: DayComponentProps) {
       }
     }
     addMeal();
-    setIsAddButton(false);
   }
 
   async function handleDeleteMeal(mealId: string) {
@@ -95,21 +93,17 @@ export default function DayComponent({id}: DayComponentProps) {
     } catch (error) {
       console.error('Error deleting meal:', error);
     } 
-
-    setIsAddButton(true);
   }
 
   async function quickAddHandler() {
-    if (isAddButton) {
-      const response = await fetch('/api/meals?size=1', { method: 'GET' });
-      const wrappedMeal = await response.json(); 
-      const randomMeal = wrappedMeal.meals[0]._id;
-      if (!day?.meals?.includes(randomMeal)) {
-        handleAddMeal(randomMeal); // no duplicate meals
-      } else {
-        console.log('DID NOT QUICK ADD MEAL: ', day?.meals, ' = existing meal ', randomMeal);
-      }
-    } 
+    const response = await fetch('/api/meals?size=1', { method: 'GET' });
+    const wrappedMeal = await response.json(); 
+    const randomMeal = wrappedMeal.meals[0]._id;
+    if (!day?.meals?.includes(randomMeal)) {
+      handleAddMeal(randomMeal); // no duplicate meals
+    } else {
+      console.log('DID NOT QUICK ADD MEAL: ', day?.meals, ' = existing meal ', randomMeal);
+    }
   }
   
   if (!day) return;
