@@ -70,7 +70,7 @@ body{
 }
 
 .plans-carousel{
-   
+    
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -106,9 +106,9 @@ body{
     text-align: center;
     background: #324732;
     gap: 20px;
-    height: 100%;
+    height: 95%;
     margin: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
     
 }
 
@@ -133,16 +133,22 @@ body{
 }
 
 .plan-flex-container{
+    background-color: #597c59;
     display: flex;
     flex-direction: row;
     margin-left: 20px;
     margin-right: 20px;
+    overflow: auto;
     overflow-x: visible;
     overflow-y: visible;
     height: auto;
     min-height: auto;
+    border-radius: 9px;
     gap: 0;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
 }
+
+
 
 .meal-plan-button {
     
@@ -366,6 +372,7 @@ body{
         justify-content: start;
     }
     .plan-container{
+        background-color: #3e3f3e;
         display: flex;
         flex-direction: column;
         justify-content: start;
