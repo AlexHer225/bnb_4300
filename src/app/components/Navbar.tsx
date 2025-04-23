@@ -41,8 +41,6 @@ const Navbar = () => {
         doLogout();
         signOut({callbackUrl: "/"});
     }
-    // console.log('session: ', session);
-    // console.log('user: ', session?.user );
 
     return (
         <nav className="topbar">

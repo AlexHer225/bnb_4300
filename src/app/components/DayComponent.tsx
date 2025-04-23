@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import "../../css/dashboard.css";
 import Meal from "./Meal";
 
+
 interface DayComponentProps {
   id: string,
   dayOfWeek?: string;
