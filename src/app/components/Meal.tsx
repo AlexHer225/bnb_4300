@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../css/meal.css';
 import Button from './Button';
 import MealInfo from './MealInfo';
+import EditMealInfo from './EditMealInfo';
 
 interface MealProps {
   id: string;
@@ -20,24 +21,25 @@ function Meal ({id, dayId, onDelete}: MealProps) {
 
   const [meal, setMeal] = useState<MealProps | null>();
   const [showDetails, setShowDetails] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-  useEffect(() => {
-    const getMeal = async () => {      
-      try {
+  // useEffect(() => {
+  //   const getMeal = async () => {      
+  //     try {
 
-        const res = await fetch(`/api/meals/${id}`);
-        const data = await res.json();
-        const meal = data.meal;
-        setMeal(meal);
-      } catch (err) {
-        console.error('Error fetching meal:', err);
-      }
-    };
-    if (id) {
-      getMeal();
-    } 
+  //       const res = await fetch(`/api/meals/${id}`);
+  //       const data = await res.json();
+  //       const meal = data.meal;
+  //       setMeal(meal);
+  //     } catch (err) {
+  //       console.error('Error fetching meal:', err);
+  //     }
+  //   };
+  //   if (id) {
+  //     getMeal();
+  //   } 
       
-  }, [id]);
+  // }, [id]);
 
   useEffect(() => {
     const getNewMeal = async () => {
@@ -57,17 +59,36 @@ function Meal ({id, dayId, onDelete}: MealProps) {
     }
   }, []);
 
+  const refreshMeal = async () => {
+    if (!id) return;
+    try {
+      const res = await fetch(`/api/meals/${id}`);
+      const data = await res.json();
+      setMeal(data.meal);
+    } catch (err) {
+      console.error('Error fetching meal:', err);
+    }
+  };
 
-  function buttonHandler() {
-    console.log('button clicked');
-  }
+  useEffect(() => {
+    refreshMeal();
+  }, [id]);
 
   function handleCloseModal() {
     setShowDetails(false);
   }
 
+  function handleCloseEditModal() {
+    setShowEditModal(false);
+  }
+
   function viewButtonHandler() {
     setShowDetails(true);
+  }
+
+  function editButtonHandler() {
+    setShowEditModal(true)
+    console.log('button clicked');
   }
 
   async function deleteButtonHandler() {
@@ -87,10 +108,11 @@ function Meal ({id, dayId, onDelete}: MealProps) {
       <div className='meal-buttons'>
         <Button onClick={viewButtonHandler} text={'View'} />
         <Button onClick={deleteButtonHandler} text={'Delete'} />
-        <Button onClick={buttonHandler} text={'Edit'} />
+        <Button onClick={editButtonHandler} text={'Edit'} />
       </div>
         {/* add modal here */}
         {showDetails &&  <MealInfo meal={meal} onClose={handleCloseModal} />}      
+        {showEditModal && <EditMealInfo meal={meal} closeForm={handleCloseEditModal} onUpdate={refreshMeal} />}
     </div>
     </>
   );
