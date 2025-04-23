@@ -22,8 +22,6 @@ interface PlanProps {
       const getPlan = async () => {
         const response = await fetch(`/api/plans/${planData._id}`, {method: 'GET'});
         const plan = await response.json();
-        // console.log('plan: ', plan);
-        // console.log('plan.user: ', plan[0].user);
         setIsSaved(!!plan[0].user);
       }
       getPlan();

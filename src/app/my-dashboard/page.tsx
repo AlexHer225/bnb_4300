@@ -24,22 +24,16 @@ export default function MyDashboard() {
   const { data: session } = useSession();
 
   const [planUpdateTrigger, setPlanUpdateTrigger] = useState(false);
-  //const [planUpdateAction, setPlanUpdateAction] = useState<"save" | "delete" | null>(null);
 
   const [dbPlans, setDBPlans] = useState<PlanType[]>([]);
   const [savedPlans, setSavedPlans] = useState<PlanType[]>([]);
 
   useEffect(() => {
-    // 🧠 Conditionally remove saved plan from dbPlans
-    //if (planUpdateAction === "save") {
-      //const savedIds = new Set(formattedPlans.map(p => p._id));
-      //setDBPlans(prev => prev.filter(p => !savedIds.has(p._id)));
-    //}
 
     const getSavedPlans = async () => {
       const response = await fetch(`/api/plans/user/${session?.user?.id}`);
       const plans = await response.json();
-      console.log('RELOADING PLANS:', plans); // ✅ Add this
+
       const formattedPlans = plans.map((plan: PlanType) => ({
         _id: plan._id,
         days: plan.days,
@@ -54,16 +48,6 @@ export default function MyDashboard() {
     }
 
   }, [session, planUpdateTrigger]);
-
-  //useEffect(() => {
-    // Create a new plan with meals. This is just for demo purposes.
-    // In a real application, you would probably want to create a plan based on user input.
-    // This function will be called when the component mounts.
-    /*const createInitialPlan = async () => {
-      const plan = await createNewPlan('Demo Plan');
-    };
-    createInitialPlan().catch(console.error);
-  }, []);*/
 
   const createNewPlan = async (name: string) => {
     const mealsResponse = await fetch(`api/meals?size=7`, {
@@ -130,7 +114,6 @@ export default function MyDashboard() {
 
       if (response.ok) {
         setDBPlans(prev => prev.filter(plan => plan._id !== planId));
-        //setPlanUpdateAction("save");
         setPlanUpdateTrigger(prev => !prev);
       } else {
         throw new Error('Failed to save plan');

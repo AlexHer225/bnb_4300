@@ -2,15 +2,6 @@
 import { useState } from 'react';
 import '../../css/mealForm.css';
 
-interface input  {
-    title: string;
-    image: string;
-    maxReadyTime: number;
-    sourceUrl: string;
-    cheap: boolean;
-    diets: string;
-    summary: string;
-}
 
 interface newDetailProps{
     onAddForm: (newMeal: string) => void;
@@ -46,7 +37,6 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
         });
 
         try{
-            // console.log('CREATING MEAL: ', formArgs.search);
             const response = await fetch('/api/meals', {
                 method: 'POST',
                 headers: {
@@ -56,7 +46,6 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
             });
             if (!response.ok) {
                 setIsErrored(true);
-                // throw new Error('Network response was not ok');
             }
             const newMeal = await response.json();
             if (!newMeal) {
@@ -66,7 +55,6 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
                 closeForm();    
             }
 
-            // Clear the form
             setFormArgs({
                 search: '',
                 cuisine: '',
@@ -78,8 +66,7 @@ export default function MealForm ({ onAddForm, closeForm }:newDetailProps) {
                 maxPrice: 20,
             });
         } catch (error) {
-            // console.error('Error creating meal');
-
+             console.error('Error creating meal');
         }
     } 
     

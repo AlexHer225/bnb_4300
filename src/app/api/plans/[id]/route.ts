@@ -16,20 +16,11 @@ export async function PUT(request:NextRequest, { params}:RouteParams ) {
     await Plan.findByIdAndUpdate(id, { days, user, name });
     return NextResponse.json({ message: "Plan updated" }, { status: 200 });
   }
-  
-  // export async function GET(request:NextRequest, { params }:RouteParams) {
-  //   const { slug: userId } = await params;
-  //   await connectMongoDB();
-  //   const plan = await Plan.find({ user: userId });
-  //   // console.log('RETURNING PLAN: ', plan);
-  //   return NextResponse.json(plan, { status: 200 });
-  // }
 
  export async function GET(request:NextRequest, { params }:RouteParams) {
     const { id } = await params;
     await connectMongoDB();
     const plan = await Plan.find({ _id: id });
-    // console.log('RETURNING PLAN: ', plan);
     return NextResponse.json(plan, { status: 200 });
 }
   

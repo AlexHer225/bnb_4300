@@ -31,9 +31,6 @@ export default function Plans({plansProps, onDelete, onSave}: PlansProps) {
                     <Plan key={index} planData={plan} onDelete={onDelete} onSave={onSave}/>
                 ))}
             </div>
-            {/* <div className="meal-plan-button">   
-                <Button onClick={handleAddWeek} text="Add Week"/>
-            </div>  */}
         </div>
     );
 }

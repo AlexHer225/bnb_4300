@@ -1,7 +1,5 @@
 import React from 'react';
 import Meal from '../models/mealSchema';
-import connectMongoDB from '../../../config/mongodb';
-import mongoose, { mongo } from 'mongoose';
 import '../../css/mealInfo.css';
 
 
@@ -22,7 +20,6 @@ interface MealInfoProps {
 }
 
 function MealInfo({ meal, onClose }: MealInfoProps ) {
-    // connectMongoDB;
     return (
         <>
             <div className="meal-modal-overlay" onClick={onClose}>

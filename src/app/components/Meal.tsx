@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/meal.css';
-import mongoose from 'mongoose';
 import Button from './Button';
 import MealInfo from './MealInfo';
-import { responseCookiesToRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
 interface MealProps {
   id: string;
@@ -19,15 +17,14 @@ interface MealProps {
 }
 
 function Meal ({id, dayId, onDelete}: MealProps) {
-// const Meal: React.FC<MealProps> = ({ id }) => {
+
   const [meal, setMeal] = useState<MealProps | null>();
   const [showDetails, setShowDetails] = useState(false);
-  // console.log('meal item created id: ', id);
 
   useEffect(() => {
     const getMeal = async () => {      
       try {
-        // console.log('ATTEMPTING TO GET MEAL: ', id);
+
         const res = await fetch(`/api/meals/${id}`);
         const data = await res.json();
         const meal = data.meal;
@@ -38,15 +35,13 @@ function Meal ({id, dayId, onDelete}: MealProps) {
     };
     if (id) {
       getMeal();
-    } else {
-      // console.log('DID NOT GET MEAL BECAUSE ID: ', id);
-    }
+    } 
+      
   }, [id]);
 
   useEffect(() => {
     const getNewMeal = async () => {
       try {
-        // console.log('attempting to get NEW MEAL: ', id);
         const res = await fetch(`/api/meals/${id}`);
         const data = await res.json();
         const meal = data.meal;

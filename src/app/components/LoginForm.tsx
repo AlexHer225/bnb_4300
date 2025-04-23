@@ -1,6 +1,5 @@
 'use client';
 import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import '../../css/loginForm.css';
 import { doCredentialLogin, doLogout } from '../actions/index';
 
@@ -22,7 +21,6 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
     });
     const [ isError, setIsError ] = useState(false);
 
-    const router = useRouter();
     async function handleSubmit (event: FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
         try{
@@ -40,7 +38,6 @@ export default function LoginForm({ onAddForm }:loginDetailProps) {
             }
         } catch (e: any) {
             setIsError(true);
-            // console.error(e);
         }
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
