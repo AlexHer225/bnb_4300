@@ -1,12 +1,9 @@
 import Card from "./Card";
 import Button from "./Button";
 import MealForm from "./MealForm";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../../css/dashboard.css";
-// import NewUser from "./MealForm";
 import Meal from "./Meal";
-import mongoose from "mongoose";
-import { clear } from "console";
 
 interface DayComponentProps {
   id: string,
@@ -23,11 +20,8 @@ interface MealProps {
 
 export default function DayComponent({id}: DayComponentProps) {
   const [day, setDay] = useState<DayComponentProps | null>(null);
-  const [isAddButton, setIsAddButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [mealUpdateTrigger, setMealUpdateTrigger] = useState(false); // 🆕
-
-  // console.log('DAY COMPONENT WITH ID: ', id);
+  const [mealUpdateTrigger, setMealUpdateTrigger] = useState(false);
 
   useEffect(() => {
     const getDay = async () => {
@@ -35,7 +29,6 @@ export default function DayComponent({id}: DayComponentProps) {
         const res = await fetch(`/api/days/${id}`, { method: 'GET' });
         const data = await res.json();
         const tempDay = data.day;
-        // console.log('SETTING DAY: ', tempDay);
         setDay(tempDay);
       } catch (err) {
         console.error('Error fetching day:', err);
@@ -51,14 +44,12 @@ export default function DayComponent({id}: DayComponentProps) {
         const res = await fetch(`/api/days/${id}`, { method: 'GET' });
         const data = await res.json();
         const tempDay = data.day;
-        // console.log('SETTING DAY: ', tempDay);
         setDay(tempDay);
       } catch (err) {
         console.error('Error fetching day:', err);
       }
     };
     getDay();
-    // console.log('TRIGGERED: meal update');
   }, [id, mealUpdateTrigger]);
 
 
@@ -83,9 +74,6 @@ export default function DayComponent({id}: DayComponentProps) {
       }
     }
     addMeal();
-    // setMeals([...meals, newMeal]);
-    // setMealUpdateTrigger(prev => !prev);
-    setIsAddButton(false);
   }
 
   async function handleDeleteMeal(mealId: string) {
@@ -101,27 +89,20 @@ export default function DayComponent({id}: DayComponentProps) {
       } else {
         throw new Error('Failed to delete meal');
       }
-      // setMeal(null);
     } catch (error) {
       console.error('Error deleting meal:', error);
     } 
-
-    // setMeals((prevMeals) => prevMeals.slice(0, -1));
-    setIsAddButton(true);
   }
 
   async function quickAddHandler() {
-    if (isAddButton) {
-      const response = await fetch('/api/meals?size=1', { method: 'GET' });
-      const wrappedMeal = await response.json(); 
-      const randomMeal = wrappedMeal.meals[0]._id;
-      // console.log('QUICK ADD RANDOM: ', randomMeal);
-      if (!day?.meals?.includes(randomMeal)) {
-        handleAddMeal(randomMeal); // no duplicate meals
-      } else {
-        console.log('DID NOT QUICK ADD MEAL: ', day?.meals, ' = existing meal ', randomMeal);
-      }
-    } 
+    const response = await fetch('/api/meals?size=1', { method: 'GET' });
+    const wrappedMeal = await response.json(); 
+    const randomMeal = wrappedMeal.meals[0]._id;
+    if (!day?.meals?.includes(randomMeal)) {
+      handleAddMeal(randomMeal); // no duplicate meals
+    } else {
+      console.log('DID NOT QUICK ADD MEAL: ', day?.meals, ' = existing meal ', randomMeal);
+    }
   }
   
   if (!day) return;
@@ -157,7 +138,6 @@ export default function DayComponent({id}: DayComponentProps) {
             <Button
               onClick={quickAddHandler}
               text="Quick Add"
-              // text={isAddButton ? "Quick Add" : "Delete Last"}
             />
           </div>
 
