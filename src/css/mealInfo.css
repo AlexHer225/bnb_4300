@@ -113,3 +113,16 @@ dd {
 .meal-link:hover {
   color: #e0e0e0;
 }
+
+.edit-button {
+  padding: 12px;
+  background-color: #324732; 
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}

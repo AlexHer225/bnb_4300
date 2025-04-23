@@ -12,6 +12,7 @@ interface RouteParams {
 export async function PUT(request:NextRequest, { params}:RouteParams ) {
     const { id } = await params;
     const { title, image, readyInMinutes, sourceUrl, cheap, diets, summary } = await request.json();
+    
     await connectMongoDB();
     await Meal.findByIdAndUpdate(id, { title, image, readyInMinutes, sourceUrl, cheap, diets, summary });
     return NextResponse.json({ message: "Meal updated" }, { status: 200 });
