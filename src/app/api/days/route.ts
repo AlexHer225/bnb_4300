@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const id = new mongoose.Types.ObjectId();
 
     await connectMongoDB();
-    // console.log(`CREATING DAY with meals: `, formattedMeals);
+
     const day = await Day.create({ id, dayOfWeek, date: formattedDate, meals: formattedMeals });
     return NextResponse.json(day, { status: 201 });
 }

@@ -151,8 +151,7 @@ export default function MyDashboard() {
         ) : (
           <h2>Looks like you have no saved plans. Create one today!</h2>
         )}
-        <h2 className='header-dashboard'>Workspace</h2>
-        <Plans plansProps={dbPlans} />
+        <Plans plansProps={dbPlans} onDelete={handleDeletePlan} onSave={handleSavePlan}/>
         <button className='new-plan-button' onClick={() => createNewPlan('New Plan')}>Create New Plan</button>
       </div>
     </div>

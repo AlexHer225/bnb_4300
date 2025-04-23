@@ -23,15 +23,6 @@ interface PlanType {
 
 // Carousel of plans 
 export default function Plans({plansProps, onDelete, onSave}: PlansProps) {
-    /*const [plans, setPlans] = useState<PlanType[]>([]);
-
-    // console.log('NEW PLANS CREATED: ', plansProps);
-
-    useEffect(() => {
-        // setPlans([...plans, ...plansProps]);
-        // setPlans(prev => [...prev, ...plansProps]);
-        setPlans(plansProps);
-    }, [plansProps]);*/
 
     return (
         <div className="plans">
